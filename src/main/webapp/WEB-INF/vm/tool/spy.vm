@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    #parse("/common/import.vm" )
+    <script type="text/javascript" src="#springUrl('')/static/js/business/common/manage.js"></script>
+    <script type="text/javascript" src="#springUrl('')/static/js/business/spy.js"></script>
+    <title>工具页</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var spyInputForm = $("#spyInputForm");
+            spy.spyInputFormValidator(spyInputForm);
+            $("#spySubmit").unbind("click").click(function () {
+                handler.validateSubmit({
+                    "form": spyInputForm,
+                    "button": $(this),
+                    "callback": function (result) {
+                        $("#spyResult").html(JSON.stringify(result));
+                    }
+                });
+            });
+        });
+    </script>
+</head>
+<body class="bg-warning">
+<div class="container-fluid">
+    <div class="row-fluid clearfix">
+        <div class="span12">
+            #parse("/common/bread-crumbs.vm")
+            <div class="page-header text-center">
+                <h1>
+                    谨慎操作! <small>操作前请务必先验证你的命令语句!</small>
+                </h1>
+            </div>
+            <form id="spyInputForm" class="form-horizontal" action="/tool/spy/submit?format=json">
+                <div class="input-group col-sm-offset-1 col-sm-10">
+                    <span class="input-group-addon">操作秘钥</span>
+                    <input type="password" class="form-control" id="p" name="p" placeholder="请输入口令">
+                </div>
+                <div class="input-group col-sm-offset-1 col-sm-10">
+                    <span class="input-group-addon">操作语句</span>
+                    <textarea class="form-control" id="s" name="s" rows="10" placeholder="支持新增和更新语句"></textarea>
+                </div>
+                <legend></legend>
+                <div class="input-group col-sm-offset-5 col-sm-5">
+                    <button id="spySubmit" type="button" class="btn btn-primary glyphicon glyphicon-fire"> 执 行</button>
+                    &nbsp;
+                    <button type="reset" class="btn btn-primary glyphicon glyphicon-repeat"> 清 空</button>
+                </div>
+            </form>
+        </div>
+        <div id="spyResult" class="text-center">
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
+		
+	<!-- 注解驱动，是spring的task全部生效 -->
+<!-- 	<task:annotation-driven />  -->
+	<context:component-scan base-package="com.yuan">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+	<aop:aspectj-autoproxy proxy-target-class="true" expose-proxy="true"/> 
+	<context:property-placeholder location="classpath*:*.properties" ignore-unresolvable="true" />
+
+	<!-- <bean class="com.ubillion.common.conf.FilterConfigurer" >
+		<property name="logHandler" value="redisLogQueue"></property>
+	</bean> -->
+
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="c3p0DataSource" />
+	</bean>
+	
+	<!-- Spring声明式事务 -->
+	<tx:advice id="userTxAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="delete*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" no-rollback-for="java.lang.RuntimeException" />
+			<tx:method name="insert*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
+			<tx:method name="update*" propagation="REQUIRED" read-only="false" rollback-for="java.lang.Exception" />
+			<tx:method name="find*" propagation="SUPPORTS" />
+			<tx:method name="get*" propagation="SUPPORTS" />
+			<tx:method name="select*" propagation="SUPPORTS" />
+			<tx:method name="countPr" propagation="NOT_SUPPORTED" />
+		</tx:attributes>
+	</tx:advice>
+
+	<aop:config>
+		<!-- <aop:pointcut id="pc" expression="execution(public * com.ubillion.controller.*.*(..))" 
+			/> -->
+		<aop:pointcut id="pc"
+			expression="execution(public * com.yuan.service.*.*(..))" />
+		<aop:advisor pointcut-ref="pc" advice-ref="userTxAdvice" />
+	</aop:config>
+
+	<import resource="mybatis-config.xml"/>
+ 	<import resource="redis-context.xml"/> 
+</beans>

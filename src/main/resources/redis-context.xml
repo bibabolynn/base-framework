@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	">
+
+<!-- 	<bean id="sentinelConfig"
+		class="org.springframework.data.redis.connection.RedisSentinelConfiguration">
+		<constructor-arg name="master" value="${redis.sentinel.masterName}" />
+		<constructor-arg name="sentinelHostAndPorts">
+			<set>
+				<value>${redis.sentinel.hostAndPort.S1}</value>
+				<value>${redis.sentinel.hostAndPort.S2}</value>
+				<value>${redis.sentinel.hostAndPort.S3}</value>
+			</set>
+		</constructor-arg>
+	</bean> -->
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxTotal" value="${jedis.pool.maxTotal}" />
+		<property name="maxIdle" value="${jedis.pool.maxIdle}" />
+		<property name="minIdle" value="${jedis.pool.minIdle}" />
+		<property name="maxWaitMillis" value="${jedis.pool.maxWaitMillis}" />
+		<property name="minEvictableIdleTimeMillis" value="${jedis.pool.minEvictableIdleTimeMillis}" />
+		<property name="numTestsPerEvictionRun" value="${jedis.pool.numTestsPerEvictionRun}" />
+		<property name="timeBetweenEvictionRunsMillis" value="${jedis.pool.timeBetweenEvictionRunsMillis}" />
+		<property name="blockWhenExhausted" value="${jedis.pool.blockWhenExhausted}" />
+		<property name="jmxEnabled" value="${jedis.pool.jmxEnabled}" />
+	</bean>
+
+	<bean id="jedisConnectionFactoryCache"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+<!-- 		<constructor-arg ref="sentinelConfig" /> -->
+		<constructor-arg ref="jedisPoolConfig" />
+		<property name="database" value="${jedis.dbIndex.cache}" />
+		<property name="timeout" value="${jedis.timeout}" />
+		<property name="hostName" value="${jedis.hostName}"/>
+		<property name="port" value="${jedis.port}" />
+		<property name="password" value="${jedis.password}"/>
+	</bean>
+	<bean id="jedisConnectionFactoryPersist"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+		<constructor-arg ref="jedisPoolConfig" />
+		<property name="database" value="${jedis.dbIndex.persist}" />
+		<property name="timeout" value="${jedis.timeout}" />
+		<property name="hostName" value="${jedis.hostName}"/>
+		<property name="port" value="${jedis.port}" />
+		<property name="password" value="${jedis.password}"/>
+	</bean>
+	<bean id="cache" class="com.yuan.redis.RedisTemplateCache"
+		p:connection-factory-ref="jedisConnectionFactoryCache" />
+	<bean id="persist" class="com.yuan.redis.RedisTemplatePersist"
+		p:connection-factory-ref="jedisConnectionFactoryPersist" />
+	
+	
+</beans>

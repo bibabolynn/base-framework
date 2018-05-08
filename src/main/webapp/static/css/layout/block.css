@@ -1,0 +1,323 @@
+/*  ====================================================  */
+/*  = BELOW CSS USED FOR SCREEN MEDIA ==================  */
+/*  ====================================================  */
+body {
+    margin: 0;
+    padding: 0;
+    font: 12px Verdana, Arial, Helvetica, sans-serif, "宋体", "黑体";
+    line-height: 1.8em;
+    text-align: left;
+    border: 0;
+}
+
+/* open div begin */
+.ajax_window {
+    width: 400px;
+    border: 1px #94b2bc solid;
+    position: relative;
+    z-index: 100;
+    background-color: #eef6fc;
+    border-radius: 5px;
+    filter: progid:DXImageTransform.Microsoft.Shadow(Color=#c5d0d4, Direction=120, strength=3);
+}
+
+.ajax_window h2 {
+    height: 25px;
+    font-size: 12px;
+    /**background-color: #8FA4F5;**/
+    background-color: #3bb3e0;
+    padding-left: 10px;
+    margin: -1px;
+    color: white;
+    border-radius: 5px;
+}
+
+.ajax_window h2 a {
+    position: absolute;
+    right: 5px;
+    font-size: 12px;
+    color: white;
+}
+
+.ajax_wait {
+    margin: 0px;
+    padding-top: 15px;
+    color: #2e5b77;
+    text-align: center;
+    background: #eef6fc;
+    height: 95%;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.ajax_wait p {
+    margin-top: 15px;
+    margin-bottom: 25px;
+}
+
+.loading_gif {
+    margin: 0px;
+    height: 40px;
+    background: url(images/blue-loading.gif) no-repeat left center;
+    width: 50px;
+    margin-top: -30px;
+    margin-left: 100px;
+    /**float: left;**/
+}
+
+.window {
+    width: 400px;
+    border: 1px #94b2bc solid;
+    position: absolute;
+    z-index: 10001;
+    background-color: white;
+    filter: progid:DXImageTransform.Microsoft.Shadow(Color=#c5d0d4, Direction=120, strength=3);
+}
+
+.window .caption {
+    background: #c1d9f3;
+    border: 1px solid white;
+    border-bottom: 0;
+    height: 24px;
+    text-align: left;
+    text-decoration: none;
+    position: relative;
+}
+
+.window .caption span {
+    display: block;
+    padding-left: 10px;
+    color: #E0F1F9;
+    float: left;
+}
+
+.window .caption .text {
+    background: transparent url(images/block.gif) no-repeat scroll 3px -40px;
+    color: #2e5b88;
+    height: 20px;
+    line-height: 22px;
+    text-align: left;
+    font-size: 12px;
+    padding: 0 0px 0 25px;
+    width: auto;
+}
+
+.window .caption a {
+    /*modify*/
+    float: right;
+    width: 21px;
+    margin-right: 5px;
+    height: 18px;
+    border: none;
+    list-style-type: none;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.window .caption a:hover {
+    border: 1px #aabbd8 solid;
+    background: #dfe9f8;
+}
+
+.window .caption .close {
+    width: 19px;
+    height: 18px;
+    position: absolute;
+    right: 0px;
+    margin: 3px 5px 0 0;
+    background: url(images/block.gif) no-repeat 0px -25px;
+    border: none;
+}
+
+.box {
+    border: 1px solid white;
+    border-top: 0;
+    padding: 0 0 10px 0;
+    background: white;
+}
+
+.tips {
+    float: right;
+    margin: 10px;
+    padding: 5px 0 0 10px;
+    text-align: left;
+    line-height: 1.5em;
+    min-height: 40px;
+    width: 260px;
+    font-size: 12px;
+}
+
+.moreTips {
+    padding: 5px 5px 0px 10px;
+    background: #e5eaf2;
+    line-height: 1.5em;
+    color: #627482;
+    min-height: 40px;
+    height: auto !important;
+    width: auto;
+    border-top: 1px #94b2bc solid;
+    position: inherit;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+.but_bg {
+    margin: 0 10px;
+    padding: 0;
+    clear: both;
+    text-align: center;
+}
+
+.but_bg .b_text {
+    background: #c1d9f3;
+    border: 1px #076db8 solid;
+    height: 18px;
+    cursor: pointer;
+    line-height: 16px;
+    margin: 0 5px 0 0;
+    padding: 0;
+}
+
+.loading {
+    margin: 0px;
+    padding: 40px 20px;
+    background: #f5fafe url(images/loading.gif) repeat-x 0 -247px;
+    overflow: hidden;
+    text-align: center;
+    height: 20px;
+}
+
+.loading .pic {
+    margin: 0px;
+    height: 20px;
+    background: url(images/loading.gif) no-repeat left center;
+    width: 120px;
+    float: left;
+}
+
+.loading .tips {
+    color: #F93;
+    text-align: left;
+    font-size: 14px;
+    margin: 0px;
+    height: 20px;
+    width: 100px;
+    padding: 0 0 0 10px;
+}
+
+.wrong .pic {
+    /*modify*/
+    margin: 10px 10px 10px 30px;
+    padding: 0 0 0 0px;
+    width: 40px;
+    height: 40px;
+    display: inline;
+    background: url(images/block.gif) no-repeat 2px -108px;
+    float: left;
+}
+
+.wrong .tips {
+    color: #F93;
+}
+
+.right .pic {
+    margin: 10px 10px 10px 30px;
+    padding: 0 0 0 0px;
+    width: 40px;
+    height: 40px;
+    background: url(images/block.gif) no-repeat 2px -66px;
+    float: left;
+    display: inline;
+}
+
+.right .tips {
+    color: #81ad7f;
+}
+
+.warning .pic {
+    margin: 10px 10px 10px 30px;
+    padding: 0 0 0 0px;
+    width: 40px;
+    height: 40px;
+    background: url(images/block.gif) no-repeat 2px -155px;
+    float: left;
+    display: inline;
+}
+
+.warning .tips {
+    color: #F93;
+}
+
+.questions .pic {
+    margin: 10px 10px 10px 30px;
+    padding: 0 0 0 0px;
+    width: 40px;
+    height: 40px;
+    background: url(images/block.gif) no-repeat 2px -203px;
+    float: left;
+    display: inline;
+}
+
+.questions .tips {
+    color: #4095ad;
+}
+
+input.but {
+    padding: 1px 0 0 1px;
+    background: url('images/rating.png') no-repeat scroll 0px -283px;
+    border: 0;
+    height: 17px;
+    cursor: pointer;
+    text-align: center;
+    width: 55px;
+    overflow: hidden;
+    line-height: 17px;
+    color: #363e6c;
+}
+
+.pop_layer {
+    background-color: #4d4d4d;
+    position: absolute;
+    z-index: 99;
+    left: 0;
+    top: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+    -moz-opacity: 0.7;
+}
+
+.botk {
+    right: 5px;
+    position: fixed;
+    width: 100px;
+    _position: absolute;
+    _top: expression(documentElement.scrollTop + documentElement.clientHeight-this.offsetHeight);
+    z-index: 999;
+    height: 100px;
+    filter: Alpha(opacity=90);
+    -moz-opacity: .9;
+    opacity: 0.9;
+    background: #ffffff;
+    color: #ffffff;
+    bottom: 5px;
+}
+
+.botts {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    z-index: 9999;
+    background: #000000;
+}
+
+#adclose {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    cursor: pointer;
+    z-index: 99999
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    #parse("/common/import.vm" )
+    <title>User</title>
+    <script type="text/javascript" src="#springUrl('')/static/js/business/common/manage.js"></script>
+    <script type="text/javascript" src="#springUrl('')/static/js/business/common/initSearch.js"></script>
+    <script type="text/javascript" src="#springUrl('')/static/js/business/common/initOperaBar.js"></script>
+    <script type="text/javascript" src="#springUrl('')/static/js/business/user.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // 定制个性化工具栏
+//            handler.initOperaBar({
+//                pageId: "userListBarDiv",
+//                refreshOperaBar: [{
+//                    type: "add", className: "start btn-info glyphicon glyphicon-eye-open", text: "启 用", callback: function () {
+//                        bootbox.alert("处理业务逻辑1");
+//                    }
+//                }, {
+//                    type: "remove", className: "removeAll"
+//                }]
+//            });
+        });
+    </script>
+</head>
+<body>
+    #parse("/error/error_msg.vm")
+    #set($result=${resultResponse.result})
+<div id="userSearchDiv" class="searchUnique container-fluid" v="user">
+    <div class="row-fluid">
+        <div class="span12">
+            #parse("/common/bread-crumbs.vm")
+            <form class="form-horizontal" role="form" id="userSearchForm">
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label" for="id">用户ID</label>
+                        <div class="col-sm-3">
+                            <input class="form-control" id="id" name="id" type="text"
+                                   value="$!{result.id}"/>
+                        </div>
+                        <label class="col-sm-1 control-label" for="orgCode">组织编号</label>
+                        <div class="col-sm-3">
+                            <input class="form-control" id="orgCode" name="orgCode" type="text"
+                                   value="$!{result.orgCode}"/>
+                        </div>
+                        <label class="col-sm-1 control-label" for="loginName">登录名</label>
+                        <div class="col-sm-3">
+                            <input class="form-control" id="loginName" name="loginName" type="text"
+                                   value="$!{result.loginName}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label" for="phone">联系电话</label>
+                        <div class="col-sm-3">
+                            <input class="form-control" id="phone" name="phone" type="text"
+                                   value="$!{result.phone}"/>
+                        </div>
+                        <label class="col-sm-1 control-label" for="status">状态</label>
+                        <div class="col-sm-3">
+                            <select class="form-control" id="status" name="status">
+                                <option value="">全部</option>
+                                #foreach($entity in $statusMap.entrySet())
+                                    <option value="$!{entity.key}" #if(${entity.key}==${result.status}) selected #end>$!{entity.value}</option>
+                                #end
+                            </select>
+                        </div>
+                        <div class="col-sm-4 text-center">
+                            <button type="reset" class="btn btn-danger glyphicon glyphicon-repeat"> 清 空
+                            </button>
+                            <button type="button" id="userQueryButton"
+                                    class="find btn btn-primary glyphicon glyphicon-search"> 查 询
+                            </button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <legend></legend>
+    <div id="userListBarDiv" class="barListUnique" v="user">
+        <script type="text/html" id="userEditTemplate">
+            #parse("/user/edit.vm" )
+        </script>
+        <script type="text/html" id="manageBarTemplate">
+            #parse("/common/list-bar.vm")
+        </script>
+        <div id="searchList">
+            #parse("/user/list.vm" )
+        </div>
+    </div>
+</div>
+</body>
+</html>

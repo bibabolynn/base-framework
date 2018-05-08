@@ -1,0 +1,62 @@
+#set($layout = "layout/null.vm")
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>登录认证管理系统</title>
+    <link rel="stylesheet" href="#springUrl('/static/css/layout/style.css')" type="text/css" charset="utf-8"/>
+    <script type="text/javascript" src="#springUrl('/static/plugins/jquery.js')"></script>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        td * {
+            line-height: normal;
+        }
+    </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var menu = $("#frmTitle");
+            $(".middle").click(function () {
+                if ($(this).hasClass("open-menu")) {
+                    $(this).removeClass("open-menu").addClass("close-menu");
+                    menu.hide(500);
+                } else {
+                    $(this).removeClass("close-menu").addClass("open-menu");
+                    $("#frmTitle").show(150);
+                }
+            }).mouseenter(function () {
+                $(this).removeClass("close-menu").addClass("open-menu");
+                menu.show(150);
+            });
+//            $(".menuContent").mouseleave(function () {
+//                $(".middle").removeClass("open-menu").addClass("close-menu");
+//                menu.hide(500);
+//            });
+        });
+    </script>
+
+</head>
+
+<body class="no-scroll">
+<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0" style="table-layout:fixed;">
+    <tr class="menuContent">
+        <td width="218" id=frmTitle noWrap name="fmTitle" align="center" valign="top">
+            <iframe id="frame_menu" name="frame_menu" height="100%" width="216" src="#springUrl('')/menu" border="0"
+                    frameborder="0" scrolling="no" style="border-left: 3px solid #1873aa;">
+                浏览器不支持嵌入式框架，或被配置为不显示嵌入式框架。
+            </iframe>
+        </td>
+        <td valign="middle" class="frame-border middle open-menu">
+          <span class="navPoint" id="switchPoint" title="关闭/打开左栏">
+        </td>
+        <td width="100%" align="center" valign="top">
+            <iframe id="frame_main" name="frame_main" height="100%" width="100%" border="0" frameborder="0"
+                    marginwidth="0" marginheight="0" src="">
+                浏览器不支持嵌入式框架，或被配置为不显示嵌入式框架。
+            </iframe>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,19 @@
+#if(${exception} &&  ${exception.msg})
+<div class="not-found-text">
+    <h3 class="not-found-text">$!exception.msg</h3>
+</div>
+#end
+##异步访问异常结果ServiceResponse处理
+#if(${resultResponse} &&  ${resultResponse.code}!='0')
+<div class="not-found-text">
+    <h3 class="not-found-text">$!{resultResponse.msg}</h3>
+</div>
+#end
+##springmvc hibernate validate异常信息处理
+#if(${errors} && ${errors.size()}>0)
+<div class="not-found-text">
+    #foreach($member in $errors.entrySet())
+        <p>$!{member.value}</p>
+    #end
+</div>
+#end

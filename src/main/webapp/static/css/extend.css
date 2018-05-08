@@ -1,0 +1,38 @@
+legend {
+    margin-bottom: 10px;
+    font-size: 16px;
+    padding: 5px;
+    color: #444;
+}
+
+.btn.glyphicon:before {
+    vertical-align: middle;
+}
+
+select {
+    vertical-align: middle;
+}
+
+.table>tbody>tr>td{
+    vertical-align: middle;
+}
+
+.table>.error{
+    background-color: ghostwhite;
+}
+.bar{
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: #f5f5f5;
+}
+.sort button{
+    padding: 3px 5px;
+    margin-left:2px
+}
+.form-group>.Wdate,.form-control.Wdate{
+    height: 34px;
+}
+.breadcrumb b {
+    border: 1px solid #DDD;
+    padding: 5px 5px;
+}

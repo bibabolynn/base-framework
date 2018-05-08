@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>服务异常</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="/static/css/error/main.css" type="text/css" media="screen, projection"/>
+    <!-- main stylesheet -->
+    <link rel="stylesheet" type="text/css" media="all" href="/static/css/error/tipsy.css"/>
+    <!-- Tipsy implementation -->
+
+    <!--[if lt IE 9]>
+    <link rel="stylesheet" type="text/css" href="/static/css/error/ie8.css"/>
+    <![endif]-->
+
+    #parse("/common/import.vm" )
+    <!-- uiToTop implementation -->
+    <script type="text/javascript" src="/static/js/error/custom-scripts.js"></script>
+    <script type="text/javascript" src="/static/js/error/jquery.tipsy.js"></script>
+    <!-- Tipsy -->
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            universalPreloader();
+
+        });
+
+        $(window).load(function () {
+
+            //remove Universal Preloader
+            universalPreloaderRemove();
+
+            rotate();
+            dogRun();
+            dogTalk();
+
+            //Tipsy implementation
+            $('.with-tooltip').tipsy({gravity: $.fn.tipsy.autoNS});
+
+        });
+        function replaceParamVal(url, paramName, replaceWith) {
+            var re;
+            if (url.indexOf(paramName + "=") > 0) {
+                re = eval('/(' + paramName + '=)([^&]*)/gi');
+            } else {
+                re = eval('/(' + paramName + '%3D)([^&]*)/gi');
+            }
+            var nUrl = url.replace(re, paramName + '=' + replaceWith);
+            return nUrl;
+        }
+
+        function goBack() {
+            var referrerUrl = document.referrer;
+            if (referrerUrl) {
+                window.location.href = replaceParamVal(referrerUrl, "random", parseInt(100000 * Math.random()));
+            } else {
+                history.back();
+            }
+        }
+    </script>
+</head>
+
+<body>
+<!-- Universal preloader -->
+<div id="universal-preloader">
+    <div class="preloader">
+        <img src="/static/images/error/universal-preloader.gif" alt="universal-preloader"
+             class="universal-preloader-preloader"/>
+    </div>
+</div>
+
+<div id="wrapper">
+    <h1 class="not-found-text">
+        #if($!{errorCode})
+            $!{exception.code}
+        #else
+            500
+        #end
+    </h1>
+    <div class="not-found-text">
+        <h3 class="not-found-text">对不起,$!errorMsg
+        </h3>
+    </div>
+    <div class="dog-wrapper">
+        <!-- dog running -->
+        <div class="dog"></div>
+        <!-- dog bubble talking -->
+        <div class="dog-bubble"></div>
+
+        <!-- The dog bubble rotates these -->
+        <div class="bubble-options">
+            <p class="dog-bubble">
+                迷失了吗，伙计？不用担心，我是一位出色的导游！
+            </p>
+            <p class="dog-bubble">
+                <br/>
+                汪! 汪! 汪!
+            </p>
+            <p class="dog-bubble">
+                <br/>
+                不要担心，我正在处理的路上！
+            </p>
+            <p class="dog-bubble">
+                现在要是有块蛋糕，该是多么美好啊！<br/><img style="margin-top:8px" src="/static/images/error/cookie.png" alt="cookie"/>
+            </p>
+            <p class="dog-bubble">
+                <br/>
+                天啊！等待真的很烦人哎！
+            </p>
+            <p class="dog-bubble">
+                <br/>
+                我要接近真像了吗？
+            </p>
+
+            <p class="dog-bubble">
+                或者我只是在兜圈子？Nah…
+            </p>
+            <p class="dog-bubble">
+                <br/>
+                好吧，我现在确实是迷失了…
+            </p>
+            <p class="dog-bubble">
+                我好想看见了一只<br/><img style="margin-top:8px" src="/static/images/error/cat.png" alt="cat"/>
+            </p>
+            <p class="dog-bubble">
+                不管怎样，我们都是要支持的? @_@
+            </p>
+        </div>
+        <!-- The dog bubble rotates these -->
+        <!-- dog bubble talking -->
+    </div>
+    <div>
+        <button class="btn btn-danger" type="button" onclick="goBack()">
+            &lt;&nbsp;返回
+        </button>
+    </div>
+    <!-- planet at the bottom -->
+    <div class="planet"></div>
+    <!-- planet at the bottom -->
+</div>
+</body>
+</html>

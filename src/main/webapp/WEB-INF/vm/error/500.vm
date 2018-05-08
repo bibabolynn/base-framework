@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>服务异常</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+##    <link rel="stylesheet" href="/static/css/error/main.css" type="text/css" media="screen, projection"/>
+    <style type="text/css">
+        .wrapper{
+            background-color: #186aa9;
+            margin: 0px;
+            padding: 20px;
+        }
+        .not-found-text {
+            color: #fff;
+            font-family: "SingleSleeveRegular", cursive;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+#set($exception=${exception})
+#if(${resultResponse})
+    #set($exception=${resultResponse})
+#end
+<div class="wrapper" >
+    <h1 class="not-found-text">
+        #if($!{exception.code})
+            $!{exception.code}
+        #else
+            500
+        #end
+    </h1>
+    <h3 class="not-found-text">出错了,$!{exception.msg}</h3>
+</div>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    #parse("/common/import.vm" )
+    <title>示例:表单页</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var form = $("#form-submit");
+            form.bootstrapValidator({
+                excluded: [':disabled', ':hidden', ':not(:visible)'],
+                live: 'enabled',
+                message: '非法的输入参数',
+//                submitButtons: 'button[type="submit"]',
+                feedbackIcons: {
+                    valid: 'glyphicon glyphicon-ok',
+                    invalid: 'glyphicon glyphicon-remove',
+                    validating: 'glyphicon glyphicon-refresh'
+                },
+                submitHandler: function (validator, form, submitButton) {
+                    validator.defaultSubmit();
+                },
+                fields: {
+                    userName: {
+                        validators: {
+                            notEmpty: {
+                                message: '姓名不能为空!'
+                            },
+                            stringLength: {
+                                min: 5,
+                                max: 20,
+                                message: '姓名长度必须在5到20个字符之间!'
+                            },
+                            regexp: {
+                                regexp: /^[a-zA-Z\.]+$/,
+                                message: '姓名必须是英文字符!'
+                            },
+//                                remote: {
+//                                    url: '',
+//                                    message: 'The username is not available'
+//                                },
+                            different: {
+                                field: 'orgCode',
+                                message: '姓名和商家不能一样!'
+                            }
+                        }
+                    },
+                    age: {
+                        validators: {
+                            regexp: {
+                                regexp: /^[1-9]{1}[0-9]{0,2}$/,
+                                message: '年龄必须是在1到999之间的数字!'
+                            }
+                        }
+                    },
+                    orgCode: {
+                        validators: {
+                            notEmpty: {
+                                message: '商家不能为空!'
+                            }
+                        }
+                    }
+                }
+
+            });
+
+            // 普通按钮异步提交
+            $("button[type='button']").click(function () {
+//                handler.validateInput({"form": form, "button": $(this)});
+
+            });
+        });
+    </script>
+</head>
+<body>
+    #parse("/error/error_msg.vm")
+    #set($result=${resultResponse.result})
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            #parse("/common/bread-crumbs.vm")
+            <p class="bg-warning">表单用法示例:http://www.ibootstrap.cn</p>
+            <legend></legend>
+
+            <h3>
+                垂直表单（默认）
+            </h3>
+            <div class="form-group has-success has-feedback">
+                <label class="control-label" for="inputSuccess2">Input with success</label>
+                <input type="text" class="form-control" id="inputSuccess2" aria-describedby="inputSuccess2Status">
+                <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                <span id="inputSuccess2Status" class="sr-only">(success)</span>
+            </div>
+            <div class="form-group has-warning has-feedback">
+                <label class="control-label" for="inputWarning2">Input with warning</label>
+                <input type="text" class="form-control" id="inputWarning2" aria-describedby="inputWarning2Status">
+                <span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span>
+                <span id="inputWarning2Status" class="sr-only">(warning)</span>
+            </div>
+            <div class="form-group has-error has-feedback">
+                <label class="control-label" for="inputError2">Input with error</label>
+                <input type="text" class="form-control" id="inputError2" aria-describedby="inputError2Status">
+                <span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+                <span id="inputError2Status" class="sr-only">(error)</span>
+            </div>
+            <div class="form-group has-success has-feedback">
+                <label class="control-label" for="inputGroupSuccess1">Input group with success</label>
+                <div class="input-group">
+                    <span class="input-group-addon">@</span>
+                    <input type="text" class="form-control" id="inputGroupSuccess1"
+                           aria-describedby="inputGroupSuccess1Status">
+                    <span class="input-group-addon">.00</span>
+                </div>
+            </div>
+            <legend></legend>
+
+            <h3>
+                水平表单
+            </h3>
+            <form id="form-submit" class="form-horizontal" role="form" action="/save" method="post">
+                <div class="form-group">
+                    <label for="userName" class="col-sm-1 control-label">姓名</label>
+                    <div class="col-sm-11">
+                        <input type="text" class="form-control" id="userName" name="userName"
+                               value="$!{result.userName}"
+                               placeholder="请输入姓名">
+                        <span class="help-block">Bootstrap 表单控件可以在输入框 input 上有一个块级帮助文本。
+                            为了添加一个占用整个宽度的内容块，请在input类型后使用 .help-block。</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="age" class="col-sm-1 control-label">年龄</label>
+                    <div class="col-sm-11">
+                        <input type="text" class="form-control" id="age" name="age" value="$!{result.age}"
+                               placeholder="请输入年龄">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="orgCode" class="col-sm-1 control-label">商家</label>
+                    <div class="col-sm-11">
+                        <textarea class="form-control" rows="3" id="orgCode" name="orgCode" value="$!{result.orgCode}"
+                                  placeholder="请输入描述"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-1 col-sm-11">
+                        <label class="sr-only">同步提交</label>
+                        <button type="submit" class="btn btn-primary">同步提交</button>
+                        <button type="button" class="btn btn-primary formBtn">异步提交</button>
+                    </div>
+                </div>
+            </form>
+
+            <legend></legend>
+            <form class="form-horizontal">
+                <div class="form-group has-success has-feedback">
+                    <label class="control-label col-sm-3" for="inputSuccess3">Input with success</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" id="inputSuccess3"
+                               aria-describedby="inputSuccess3Status">
+                        <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                        <span id="inputSuccess3Status" class="sr-only">(success)</span>
+                    </div>
+                </div>
+                <div class="form-group has-success has-feedback">
+                    <label class="control-label col-sm-3" for="inputGroupSuccess2">Input group with success</label>
+                    <div class="col-sm-9">
+                        <div class="input-group">
+                            <span class="input-group-addon">@</span>
+                            <input type="text" class="form-control" id="inputGroupSuccess2"
+                                   aria-describedby="inputGroupSuccess2Status">
+                        </div>
+                        <span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+                        <span id="inputGroupSuccess2Status" class="sr-only">(success)</span>
+                    </div>
+                </div>
+            </form>
+
+            <legend></legend>
+            <h3>内联表单</h3>
+            <form class="form-inline" role="form" action="/delete">
+                <fieldset disabled>
+                    <div class="form-group">
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="inlineCheckbox1" value="option1"> 选项 1
+                        </label>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="inlineCheckbox2" value="option2"> 选项 2
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optionsRadiosinline" id="optionsRadios3" value="option1" checked>
+                            选项 1
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="optionsRadiosinline" id="optionsRadios4" value="option2"> 选项 2
+                        </label>
+                    </div>
+                </fieldset>
+                <div class="form-group input-group">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default">
+                            下拉菜单
+                        </button>
+                        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">菜单项1</a></li>
+                            <li class="disabled"><a href="#">菜单项2</a></li>
+                            <li class="divider">
+                            </li>
+                            <li><a href="#">菜单项3</a></li>
+                        </ul>
+                    </div>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="ts" class="control-label">日期控件</label>
+                    <input type="text" class="Wdate" id="ts" name="ts" placeholder="请输入日期"
+                           onClick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+                </div>
+                <div class="form-group">
+                    <label for="userId" class="control-label">userId</label>
+                    <input id="userId" class="form-control" name="userId" type="text"/>
+                </div>
+                <div class="form-group">
+                    <label class="sr-only">删除</label>
+                    <button type="submit" class="btn btn-danger">删 除</button>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">请求响应结果</label>
+                    <p class="form-control-static">$!{resultResponse.msg}</p>
+                </div>
+            </form>
+            <legend></legend>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

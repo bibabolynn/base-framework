@@ -1,0 +1,22 @@
+#set($layout = "layout/null.vm")
+#set($iversion = "20171218")
+#set($itheme = "bootstrap")
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" type="text/css" href="#springUrl('')/static/plugins/$!{itheme}/css/bootstrap.min.css?v=$!{iversion}" charset="utf-8"/>
+<link rel="stylesheet" type="text/css" href="#springUrl('')/static/plugins/$!{itheme}/css/bootstrapValidator.min.css?v=$!{iversion}" charset="utf-8"/>
+<link rel="stylesheet" type="text/css" href="#springUrl('')/static/plugins/summernote/summernote.css?v=$!{iversion}" charset="utf-8"/>
+<link rel="stylesheet" type="text/css" href="#springUrl('')/static/css/fenye.css?v=$!{iversion}" charset="utf-8"/>
+<link rel="stylesheet" type="text/css" href="#springUrl('')/static/css/layout/block.css?v=$!{iversion}" charset="utf-8"/>
+<link rel="stylesheet" type="text/css" href="#springUrl('')/static/css/extend.css?v=$!{iversion}" charset="utf-8"/>
+
+<script type="text/javascript" src="#springUrl('')/static/plugins/jquery.js?v=$!{iversion}"></script>
+<script type="text/javascript" src="#springUrl('')/static/js/business/common/plugin.js?v=$!{iversion}"></script>
+<script type="text/javascript" src="#springUrl('')/static/plugins/$!{itheme}/js/bootstrap.min.js?v=$!{iversion}"></script>
+<script type="text/javascript" src="#springUrl('')/static/plugins/$!{itheme}/js/bootbox.min.js?v=$!{iversion}"></script>
+<script type="text/javascript" src="#springUrl('')/static/plugins/$!{itheme}/js/tabs.js?v=$!{iversion}"></script>
+<script type="text/javascript" src="#springUrl('')/static/plugins/$!{itheme}/js/jquery.bootstrap.wizard.min.js?v=$!{iversion}"></script>
+<script type="text/javascript" src="#springUrl('')/static/plugins/$!{itheme}/js/bootstrapValidator.min.js?v=$!{iversion}"></script>
+<script type="text/javascript" src="#springUrl('')/static/plugins/summernote/summernote.min.js?v=$!{iversion}"></script>
+<script type="text/javascript" src="#springUrl('')/static/plugins/My97DatePicker/WdatePicker.js?v=$!{iversion}"></script>
+<script type="text/javascript" src="#springUrl('')/static/plugins/jquery-template/jquery.tmpl.min.js?v=$!{iversion}"></script>
+<script type="text/javascript" src="#springUrl('')/static/plugins/jquery-form/jquery.form.js?v=$!{iversion}"></script>

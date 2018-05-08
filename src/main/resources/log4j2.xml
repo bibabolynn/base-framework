@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Properties>
+        <Property name="baseDir">/log</Property>
+        <Property name="appName">base-monitor</Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d [%t] %-5level %logger{36}(%L) - %msg%n"/>
+        </Console>
+        <RollingFile name="INFO" fileName="${baseDir}/info.log"
+                     filePattern="${baseDir}/$${date:yyyy-MM}/info-%d{yyyy-MM-dd}.log.gz">
+            <PatternLayout pattern="%d %p %c{1.} [%t]  %m%n" />
+            <CronTriggeringPolicy schedule="0 0 0 * * ?"/>
+        </RollingFile>
+        <RollingFile name="Error" fileName="${baseDir}/error.log"
+                     filePattern="${baseDir}/$${date:yyyy-MM}/error-%d{yyyy-MM-dd}.log.gz">
+            <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="%d %p %c{36} [%t] %m%n" />
+            <CronTriggeringPolicy schedule="0 0 0 * * ?"/>
+        </RollingFile>
+        <!-- <RollingFile name="Monitor" fileName="${baseDir}/monitor.log"
+                     filePattern="${baseDir}/$${date:yyyy-MM}/monitor-%d{yyyy-MM-dd}.log.gz">
+            <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${appName} [%t]%d %p %logger{36} |%X{session_id}|%X{thread_key}|%X{user_no}-%X{user_name}|%X{control_name}|%X{client_ip}|%X{service_ip}|%X{uri}|%X{methed}|%replace{ %X{req_str}|%X{query_string}|%m  %xEx}{\n}{&lt;br&gt;} %ex{0}%n" />
+            <CronTriggeringPolicy schedule="0 0 0 * * ?"/>
+        </RollingFile> -->
+    </Appenders>
+    <Loggers>
+        <Logger name="com.yuan.dao" level="trace" additivity="false">
+            <AppenderRef ref="INFO"/>
+            <AppenderRef ref="Console"/>
+        </Logger>
+        <Logger name="com.yuan.dao.MAvoidDuplicationMapper" level="info" additivity="false">
+            <AppenderRef ref="INFO"/>
+        </Logger>
+        <Root level="${mvn.log.level}">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="INFO"/>
+            <AppenderRef ref="Error"/>
+            <AppenderRef ref="Monitor"/>
+        </Root>
+    </Loggers>
+</Configuration>

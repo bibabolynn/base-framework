@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toolbox>
+    <tool>
+        <key>number</key>
+        <scope>application</scope>
+        <class>org.apache.velocity.tools.generic.NumberTool</class>
+    </tool>
+    <tool>
+        <key>math</key>
+        <scope>application</scope>
+        <class>org.apache.velocity.tools.generic.MathTool</class>
+    </tool>
+    <tool>
+        <key>esc</key>
+        <scope>application</scope>
+        <class>org.apache.velocity.tools.generic.EscapeTool</class>
+    </tool>
+    <tool>
+        <key>stringEscapeUtils</key>
+        <class>org.apache.commons.lang.StringEscapeUtils</class>
+    </tool>
+
+</toolbox>

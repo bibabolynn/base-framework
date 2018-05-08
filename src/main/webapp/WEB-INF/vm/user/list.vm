@@ -1,0 +1,62 @@
+<script type="text/javascript" src="#springUrl('')/static/js/business/common/initList.js"></script>
+#parse("/error/error_msg.vm")
+#set($result=$!{resultResponse.result})
+<div id="userListDiv" class="col-md-12 column listUnique" v="user">
+    <table class="table">
+        <thead>
+        <tr class="active">
+            #if($result && $result.size() > 0)
+                <th><input type="checkbox" name="userAllCheckbox"></th>
+            #end
+            <th pCol="id">用户ID</th>
+            <th pCol="org_code">组织编号</th>
+            <th>登录名</th>
+            <th>登录凭证</th>
+            <th>用户编号</th>
+            <th>中文名</th>
+            <th>联系电话</th>
+            <th>邮箱</th>
+            <th>状态</th>
+            <th pCol="last_login_time">上次登录时间</th>
+            <th>操 作</th>
+        </tr>
+        </thead>
+        <tbody>
+            #if($result && $result.size() > 0)
+                #foreach( $data in ${result} )
+                    #set($mode=$!{velocityCount}%3)
+                <tr class="#if($mode==1) error #elseif($mode==2) info #else success #end">
+                    <td><input type="checkbox" name="userCheckbox" value="${data.id}"></td>
+                    <td>$!{data.id}</td>
+                    <td>$!{data.orgCode}</td>
+                    <td>$!{data.loginName}</td>
+                    <td>$!{data.loginCredentials}</td>
+                    <td>$!{data.userCode}</td>
+                    <td>$!{data.cn}</td>
+                    <td>$!{data.phone}</td>
+                    <td>$!{data.email}</td>
+                    <td>
+                        #foreach($entity in $statusMap.entrySet())
+                            #if(${entity.key}==${data.status}) $!{entity.value}  #break #end
+                        #end
+                    </td>
+                    <td>$!dateFormatUtils.format($!{data.lastLoginTime},"yyyy-MM-dd HH:mm:ss")</td>
+                    <td class="manage">
+                        <button type="button" class="edit btn-link" v="$!{data.id}" >修 改</button>
+                        <button type="button" class="start_stop #if(${data.yn}==0) start #else stop #end btn-link" v="$!{data.id}" >#if(${data.yn}==0) 已启用 #else 已禁用 #end</button>
+                        <button type="button" class="view btn-link" v="$!{data.id}" >查 看</button>
+                    </td>
+                </tr>
+                #end
+            #else
+                <tr class="warning">
+                    <td colspan="12">子曾经曰过：吾有知乎哉?无知也,有鄙夫问于我,空空如也,我叩其两端而竭焉.</td>
+                </tr>
+            #end
+        </tbody>
+    </table>
+    <!--分页-->
+    <div class="msdn">
+        #pageTag("/user/list",$!{resultResponse.page},$!{resultResponse.params})
+    </div>
+</div>

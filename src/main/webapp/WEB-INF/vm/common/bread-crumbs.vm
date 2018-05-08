@@ -1,0 +1,17 @@
+#if($breadCrumbsList && $breadCrumbsList.size() > 0)
+<ul class="breadcrumb">
+    #foreach( $data in ${breadCrumbsList})
+        #set($lastNum=$breadCrumbsList.size() - $!{velocityCount})
+            #if($!{lastNum} > 0)
+                <li #if($!{velocityCount} == 1) class="glyphicon glyphicon-hand-right"#end>
+                    #if($!{velocityCount} == 1)
+                        当前位置：
+                    #end
+                    <a href=#if(${data.href} == "") '#' #else '$!{data.href}' #end>$!{data.text}</a> <span class="divider"></span>
+                </li>
+            #else
+                <li class="active">$!{data.text}</li>
+            #end
+    #end
+</ul>
+#end

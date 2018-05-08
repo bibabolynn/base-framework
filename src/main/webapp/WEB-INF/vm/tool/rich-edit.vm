@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    #parse("/common/import.vm" )
+    <link rel="stylesheet" type="text/css" href="#springUrl('')/static/plugins/kindeditor/themes/default/default.css"
+          charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="#springUrl('')/static/plugins/kindeditor/plugins/code/prettify.css"
+          charset="utf-8"/>
+    <script type="text/javascript" src="#springUrl('')/static/plugins/kindeditor/kindeditor-all-min.js"></script>
+    <script type="text/javascript" src="#springUrl('')/static/plugins/kindeditor/lang/zh-CN.js"></script>
+    <script type="text/javascript" src="#springUrl('')/static/plugins/kindeditor/plugins/code/prettify.js"></script>
+    <title>富文本编辑页</title>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            KindEditor.ready(function (K) {
+                var editor = K.create('textarea[name="content"]', {
+                    uploadJson: '/load/uploadImg.json',//文件上传服务
+                    allowFileManager: true,
+                    afterCreate: function () {
+                        var self = this;
+                        K.ctrl(document, 13, function () {
+                            $("#submit").click();
+                        });
+                        K.ctrl(self.edit.doc, 13, function () {
+                            $("#submit").click();
+                        });
+                    }
+                });
+                K('input[id="submit"]').click(function(e) {
+                    editor.sync();
+                    system.ajaxPostAsync("/tool/kindEditor/save.json", $(document.forms['example']).serialize() , function (result) {
+                        if(result.resultResponse && result.resultResponse.code == 0){
+                            $("#result").html(result.resultResponse.result).addClass("bg-warning");
+                        }else{
+                            bootbox.alert(JSON.stringify(result));
+                        }
+                    });
+                });
+                prettyPrint();
+            });
+        });
+    </script>
+</head>
+<body class="bg-warning">
+<div class="container-fluid">
+    <div class="row-fluid clearfix">
+        <div class="span12">
+            #parse("/common/bread-crumbs.vm")
+            <div class="page-header text-center">
+                <h1>插件使用示例参照:
+                    <small>http://kindeditor.net/demo.php</small>
+                </h1>
+            </div>
+            <form name="example" class="form-horizontal" method="post">
+                <div class="input-group col-sm-offset-1 col-sm-10">
+                    <textarea name="content" cols="100" rows="8" style="width:100%;height:300px;visibility:hidden;">$!{resultResponse.result}</textarea>
+                </div>
+                <div class="input-group col-sm-offset-5 col-sm-6">
+                    <input type="button" id="submit" class="btn btn-primary" value="提交快捷键: Ctrl + Enter"/>
+                </div>
+            </form>
+            <div id="result" class="page-footer text-center"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

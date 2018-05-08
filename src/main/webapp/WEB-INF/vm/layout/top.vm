@@ -1,0 +1,47 @@
+#set($layout = "layout/null.vm")
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>wizard管理系统</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <link rel="stylesheet" href="#springUrl('/static/css/layout/style.css')" type="text/css" charset="utf-8"/>
+    <script type="text/javascript" src="#springUrl('/static/plugins/jquery.js')"></script>
+    <script type="text/javascript" src="#springUrl('/static/js/layout/main.js')"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#top-logout").off().on("click", function (e) {
+                e.preventDefault();
+                top.location.href = "/logout?_" + Math.random();
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="header">
+    <div class="header-top">
+        <div id="logo">
+            <a href="javascript:void(0);" target="_blank" class="jd"></a>
+            <a href="javascript:void(0);" class="sys">wizard管理系统</a>
+        </div>
+        <div class="nav" style="width: 65%">
+            <a href="" target="_blank">
+                <marquee id="affiche" align="top" behavior="alternate" direction="right" scrollamount="3"
+                         onMouseOut="this.start()" onMouseOver="this.stop()">
+                    <font style="color: white">
+                        <b>广而告之:</b> 持续维护中,如有好的想法或建议,请联系yuanlin_jlu@163.com
+                    </font>
+                </marquee>
+            </a>
+        </div>
+        <div class="user">
+            <span class="mr20">欢迎您，$!stringEscapeUtils.escapeHtml($!{loginContext.nick})！</span>
+            <a id="top-logout" href="javascript:void(0)"><span class="ico ico-logoff"></span>[退出]</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

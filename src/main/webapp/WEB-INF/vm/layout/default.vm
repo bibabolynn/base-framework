@@ -1,0 +1,7 @@
+<script type="text/javascript">
+    var springUrl = function(url){
+        return ("#springUrl('')" + url);
+    };
+</script>
+$screen_content
+

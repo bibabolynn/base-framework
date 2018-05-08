@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<profilesXml xmlns="http://maven.apache.org/PROFILES/1.0.0"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://maven.apache.org/PROFILES/1.0.0 http://maven.apache.org/xsd/profiles-1.0.0.xsd">
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <!--database config-->
+                <mvn.jdbc.driverClassName>com.mysql.jdbc.Driver</mvn.jdbc.driverClassName>
+                <mvn.jdbc.url>jdbc:mysql://ip:3306/databasename?characterEncoding=UTF-8;useUnicode=TRUE;autoReconnect=true</mvn.jdbc.url>
+                <mvn.jdbc.username></mvn.jdbc.username>
+                <mvn.jdbc.password></mvn.jdbc.password>
+
+                <!--redis config-->
+                <mvn.jedis.pool.maxTotal>500</mvn.jedis.pool.maxTotal>
+                <mvn.jedis.pool.maxIdle>20</mvn.jedis.pool.maxIdle>
+                <mvn.jedis.pool.minIdle>8</mvn.jedis.pool.minIdle>
+                <mvn.jedis.pool.minEvictableIdleTimeMillis>1800000</mvn.jedis.pool.minEvictableIdleTimeMillis>
+                <mvn.jedis.pool.numTestsPerEvictionRun>3</mvn.jedis.pool.numTestsPerEvictionRun>
+                <mvn.jedis.pool.timeBetweenEvictionRunsMillis>3000</mvn.jedis.pool.timeBetweenEvictionRunsMillis>
+                <mvn.jedis.pool.blockWhenExhausted>true</mvn.jedis.pool.blockWhenExhausted>
+                <mvn.jedis.pool.maxWaitMillis>3000</mvn.jedis.pool.maxWaitMillis>
+                <mvn.jedis.pool.jmxEnabled>false</mvn.jedis.pool.jmxEnabled>
+                <mvn.jedis.timeout>10000</mvn.jedis.timeout>
+                <mvn.jedis.dbIndex.cache>0</mvn.jedis.dbIndex.cache>
+                <mvn.jedis.dbIndex.persist>1</mvn.jedis.dbIndex.persist>
+                <mvn.jedis.hostName></mvn.jedis.hostName>
+                <mvn.jedis.port>6379</mvn.jedis.port>
+                <mvn.jedis.password></mvn.jedis.password>
+
+                <!--log-->
+                <mvn.baseDir>/log</mvn.baseDir>
+                <mvn.log.level>debug</mvn.log.level>
+            </properties>
+        </profile>
+        <profile>
+            <id>pre</id>
+            <properties>
+            </properties>
+        </profile>
+        <profile>
+            <id>production</id>
+            <properties>
+            </properties>
+        </profile>
+    </profiles>
+</profilesXml>

@@ -1,0 +1,94 @@
+#parse("/error/error_msg.vm")
+#set($result=${resultResponse.result})
+<form id="userInputForm" name="userInputForm" class="form-horizontal" role="form" action="" method="post">
+    <div class="form-group">
+        <label for="id" class="col-sm-2 control-label">用户ID</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="id" name="id"  value="$!{result.id}"   readonly="readonly"   maxLength=19  placeholder="用户ID">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="orgCode" class="col-sm-2 control-label">组织编号</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="orgCode" name="orgCode"  value="$!{result.orgCode}"    maxLength=50  placeholder="组织编号">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="loginName" class="col-sm-2 control-label">登录名</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="loginName" name="loginName"  value="$!{result.loginName}"    maxLength=50  placeholder="登录名">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="loginCredentials" class="col-sm-2 control-label">登录凭证</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="loginCredentials" name="loginCredentials"  value="$!{result.loginCredentials}"    maxLength=100  placeholder="登录凭证">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="userCode" class="col-sm-2 control-label">用户编号</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="userCode" name="userCode"  value="$!{result.userCode}"    maxLength=50  placeholder="用户编号">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="cn" class="col-sm-2 control-label">中文名</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="cn" name="cn"  value="$!{result.cn}"    maxLength=50  placeholder="中文名">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="phone" class="col-sm-2 control-label">联系电话</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="phone" name="phone"  value="$!{result.phone}"    maxLength=100  placeholder="联系电话">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="email" class="col-sm-2 control-label">邮箱</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="email" name="email"  value="$!{result.email}"    maxLength=100  placeholder="邮箱">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="status" class="col-sm-2 control-label">状态</label>
+        <div class="col-sm-10">
+            <select class="form-control" id="status" name="status">
+                <option value="">请选择</option>
+                #foreach($entity in $statusMap.entrySet())
+                    <option value="$!{entity.key}" #if(${entity.key}==${result.status}) selected #end>$!{entity.value}</option>
+                #end
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="lockStatus" class="col-sm-2 control-label">锁定状态</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="lockStatus" name="lockStatus"  value="$!{result.lockStatus}"    maxLength=3  placeholder="锁定状态">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="lastLoginTime" class="col-sm-2 control-label">上次登录时间</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control Wdate" id="lastLoginTime" name="lastLoginTime"  value="$!dateFormatUtils.format($!{result.lastLoginTime},'yyyy-MM-dd HH:mm:ss')"    maxLength=19  placeholder="上次登录时间" onclick="WdatePicker({el:this,dateFmt:'yyyy-MM-dd HH:mm:ss'})">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="loginFailCount" class="col-sm-2 control-label">连续登录失败次数</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="loginFailCount" name="loginFailCount"  value="$!{result.loginFailCount}"    maxLength=10  placeholder="连续登录失败次数">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="remark" class="col-sm-2 control-label">备注</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="remark" name="remark"  value="$!{result.remark}"    maxLength=300  placeholder="备注">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="sortNo" class="col-sm-2 control-label">排序号</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="sortNo" name="sortNo"  value="$!{result.sortNo}"    maxLength=10  placeholder="排序号">
+        </div>
+    </div>
+    #parse("/common/view-foot.vm")
+</form>

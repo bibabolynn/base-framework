@@ -1,0 +1,56 @@
+#if(${result.createTime})
+<div class="form-group">
+    <label for="createTime" class="col-sm-2 control-label">创建时间</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" id="createTime" name="createTime" disabled value="$!dateFormatUtils.format($!{result.createTime},'yyyy-MM-dd HH:mm:ss')"    maxLength=19  placeholder="创建时间">
+    </div>
+</div>
+#end
+#if(${result.createPin})
+<div class="form-group">
+    <label for="createPin" class="col-sm-2 control-label">创建人</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" id="createPin" name="createPin" disabled value="$!{result.createPin}"    maxLength=50  placeholder="创建人">
+    </div>
+</div>
+#end
+#if(${result.updateTime})
+<div class="form-group">
+    <label for="updateTime" class="col-sm-2 control-label">更新时间</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" id="updateTime" name="updateTime" disabled value="$!dateFormatUtils.format($!{result.updateTime},'yyyy-MM-dd HH:mm:ss')"    maxLength=19  placeholder="更新时间">
+    </div>
+</div>
+#end
+#if(${result.updatePin})
+<div class="form-group">
+    <label for="updatePin" class="col-sm-2 control-label">更新人</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" id="updatePin" name="updatePin" disabled value="$!{result.updatePin}"    maxLength=50  placeholder="更新人">
+    </div>
+</div>
+#end
+#if(${result.sysVersion})
+<div class="form-group">
+    <label for="sysVersion" class="col-sm-2 control-label">版本号</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" id="sysVersion" name="sysVersion" disabled value="$!{result.sysVersion}"    maxLength=10  placeholder="版本号">
+    </div>
+</div>
+#end
+#if(${result.yn})
+<div class="form-group">
+    <label for="yn" class="col-sm-2 control-label">删除标识</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" id="yn" name="yn" disabled value="$!{result.yn}"  maxLength=3  placeholder="删除标识">
+    </div>
+</div>
+#end
+#if(${result.ts})
+<div class="form-group">
+    <label for="ts" class="col-sm-2 control-label">时间戳</label>
+    <div class="col-sm-10">
+        <input type="text" class="form-control" id="ts" name="ts" disabled value="$!dateFormatUtils.format($!{result.ts},'yyyy-MM-dd HH:mm:ss')"    maxLength=19  placeholder="时间戳">
+    </div>
+</div>
+#end
