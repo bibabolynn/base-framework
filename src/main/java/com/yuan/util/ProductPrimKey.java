@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.annotation.Resource;
 
+import com.yuan.service.AccessService;
 import com.yuan.util.constant.PrimKeyCode;
 import com.yuan.util.constant.PubErrorCode;
 import org.springframework.stereotype.Component;
@@ -22,9 +23,8 @@ public class ProductPrimKey {
 	 * sequence功能查询
 	 * 
 	 * @param keyName ：sequence key
-	 * @param maxValue 允许的最大值
 	 * @return
-	 * @throws TranFailException
+	 * @throws BaseException
 	 * 备注：暂时写死，传递的key加上时间
 	 */
 	public String querySerialNumber(String keyName) throws BaseException {

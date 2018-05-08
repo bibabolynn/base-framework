@@ -8,13 +8,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.ubillion.util.JavaUtil;
-import com.ubillion.util.LogUtil;
-import com.ubillion.util.SysParamUtil;
-import com.ubillion.util.TranFailException;
-import com.ubillion.util.constant.Constants;
-import com.ubillion.util.constant.PubErrorCode;
 
+import com.yuan.util.BaseException;
+import com.yuan.util.JavaUtil;
+import com.yuan.util.LogUtil;
+import com.yuan.util.constant.PubErrorCode;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
@@ -29,10 +27,9 @@ public class WordTemplateUtil {
      * @param dataMap: 模板数据存放地
      * @param saveFilePath: 文件存储路径
      * @param saveFileName : 文件存储名称
-     * @param out
-     * @throws TranFailException
+     * @throws BaseException
      */
-    public void write(String templatePath, String templateName, Map<String, Object> dataMap, String saveFilePath,String saveFileName) throws TranFailException {
+    public void write(String templatePath, String templateName, Map<String, Object> dataMap, String saveFilePath,String saveFileName) throws BaseException {
         Writer out = null;
         try {
             JavaUtil.createDirectory(saveFilePath); // 创建文件路径
@@ -47,7 +44,7 @@ public class WordTemplateUtil {
                     out.close();
                 }
             } catch (IOException e) {
-                throw new TranFailException(PubErrorCode.PUB_CLOSE_TEMP, "关闭流失败");
+                throw new BaseException(PubErrorCode.PUB_CLOSE_TEMP, "关闭流失败");
             }
         }
     }
@@ -57,9 +54,9 @@ public class WordTemplateUtil {
 	 * @param templatePath : 模板所在路径
 	 * @param templateName: 模板名称，不带扩展名
 	 * @return Template;
-	 * @throws TranFailException
+	 * @throws BaseException
 	 */
-	private Template getTemplate(String templatePath, String templateName) throws TranFailException {
+	private Template getTemplate(String templatePath, String templateName) throws BaseException {
 		try {
 		    Configuration configuration = new Configuration();
             configuration.setDefaultEncoding("UTF-8");
@@ -75,15 +72,15 @@ public class WordTemplateUtil {
 	/*
 	 * 测试方法
 	 */
-	public static void main(String[] args) throws TranFailException {
-		Map<String, Object> map = new HashMap<String, Object>();
-		WordTemplateUtil wordUtil = new WordTemplateUtil();
-		map.put("phone", "13681144423");
-		try {
-			String filePath = SysParamUtil.getSysParValue("IMAGE_ROOT") + JavaUtil.DateToString(new Date(), "yyyyMMdd")+ "/";
-			wordUtil.write(Constants.TEMPLATE_PATH, "word", map, filePath, "test.doc");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+//	public static void main(String[] args) throws BaseException {
+//		Map<String, Object> map = new HashMap<String, Object>();
+//		WordTemplateUtil wordUtil = new WordTemplateUtil();
+//		map.put("phone", "13681144423");
+//		try {
+//			String filePath = SysParamUtil.getSysParValue("IMAGE_ROOT") + JavaUtil.DateToString(new Date(), "yyyyMMdd")+ "/";
+//			wordUtil.write(Constants.TEMPLATE_PATH, "word", map, filePath, "test.doc");
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 }

@@ -195,14 +195,16 @@ public class HttpClientUtil {
 	        /*
 	         * 2、设置连接超时时间，如果系统参数配置超时时间以配置为准，如没有配置以默认为准
 	         */
-	        String default_connection_time_out = SysParamUtil.getSysParValue("CONNECTION_TIME_OUT");
+//	        String default_connection_time_out = SysParamUtil.getSysParValue("CONNECTION_TIME_OUT");
+			String default_connection_time_out = "";
 	        if(StringUtils.isNotBlank(default_connection_time_out)){
 	            DEFAULT_CONNECTION_TIME_OUT = Integer.valueOf(default_connection_time_out);
 	        }
 	        /*
 	         * 3、设置请求超时时间，如果系统参数配置超时时间以配置为准，如没有配置以默认为准
 	         */
-	        String default_socket_time_out = SysParamUtil.getSysParValue("SOCKET_TIME_OUT");
+//	        String default_socket_time_out = SysParamUtil.getSysParValue("SOCKET_TIME_OUT");
+			String default_socket_time_out = "";
 	        if(StringUtils.isNotBlank(default_socket_time_out)){
 	            DEFAULT_SOCKET_TIME_OUT = Integer.valueOf(default_socket_time_out);
 	        }

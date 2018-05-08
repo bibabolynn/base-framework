@@ -3,10 +3,10 @@ package com.yuan.util;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.yuan.model.Users;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import com.ubillion.model.MUsers;
 
 /**
  * 获取session中相关信息公共方法
@@ -45,10 +45,10 @@ public class SessionUtil {
      * 
      * @return
      */
-    public static MUsers getCurrentUser() {
-        MUsers mUsers = null;
+    public static Users getCurrentUser() {
+        Users mUsers = null;
         if (getSession() != null) {
-            mUsers = (MUsers) getSession().getAttribute("user");
+            mUsers = (Users) getSession().getAttribute("user");
         }
         return mUsers;
     }

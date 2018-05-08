@@ -28,13 +28,11 @@
         </RollingFile> -->
     </Appenders>
     <Loggers>
-        <Logger name="com.yuan.dao" level="trace" additivity="false">
-            <AppenderRef ref="INFO"/>
-            <AppenderRef ref="Console"/>
-        </Logger>
-        <Logger name="com.yuan.dao.MAvoidDuplicationMapper" level="info" additivity="false">
-            <AppenderRef ref="INFO"/>
-        </Logger>
+        <!--<Logger name="com.yuan.dao" level="trace" additivity="false">-->
+            <!--<AppenderRef ref="INFO"/>-->
+            <!--<AppenderRef ref="Console"/>-->
+        <!--</Logger>-->
+
         <Root level="${mvn.log.level}">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="INFO"/>

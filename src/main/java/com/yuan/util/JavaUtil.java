@@ -1140,10 +1140,10 @@ public class JavaUtil {
     public static Object reflectUtil(String className,String methodName,JSONObject contJson) throws BaseException{
         Object result = null;
         try{
-            Class<?> clz = Class.forName(className); //加载类
-            Object otargetObject = ClusterQuartzJobProvider.getBean(clz); //获取bean
-            Method method = otargetObject.getClass().getMethod(methodName,new Class[] { String.class }); //获取动态执行方法
-            result = method.invoke(otargetObject, new Object[] {contJson.toString() });
+//            Class<?> clz = Class.forName(className); //加载类
+//            Object otargetObject = ClusterQuartzJobProvider.getBean(clz); //获取bean
+//            Method method = otargetObject.getClass().getMethod(methodName,new Class[] { String.class }); //获取动态执行方法
+//            result = method.invoke(otargetObject, new Object[] {contJson.toString() });
         }catch(Exception e){
             throw LogUtil.handerEx(PubErrorCode.PUB_JAVA_UTIL, "反射调用失败，参数为:"+ className + "|"+methodName, LogUtil.EMPTY, e);
         }
@@ -1209,7 +1209,7 @@ public class JavaUtil {
     public static String getSessionOpNo() throws BaseException{
         String operatorNo = null;
         try{
-            operatorNo = SessionUtil.getCurrentUser()==null? Constants.OP_NO:SessionUtil.getCurrentUser().getUserNo();
+            operatorNo = SessionUtil.getCurrentUser()==null? Constants.OP_NO:SessionUtil.getCurrentUser().getUserId();
         }catch(Exception e){
             throw LogUtil.handerEx(PubErrorCode.PUB_JAVA_UTIL, "获取session中操作员编号出错", LogUtil.EMPTY, e);
         }

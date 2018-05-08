@@ -24,7 +24,8 @@ public class CheckMsg {
             /*
              * 1、解密验证
              */
-            str = AESUtil.Decrypt(str, SysParamUtil.getSysParValue("AES_KEY")); // 解密数据 = 签文 + 明文
+//            str = AESUtil.Decrypt(str, SysParamUtil.getSysParValue("AES_KEY")); // 解密数据 = 签文 + 明文
+            str= "";
             String sign = str.substring(0, 64); // 签文
             ming = str.substring(64); // 明文
             LogUtil.info("请求报文:" + ming);
@@ -48,14 +49,14 @@ public class CheckMsg {
      * @throws BaseException
      */
     public static void checkSign(String sign, String ming) throws BaseException {
-        try {
-            String degist = new Sha256Hash(ming + SysParamUtil.getSysParValue("REQ_SALT")).toString(); // 摘要 = 明文 + 盐后
-            if (!sign.equals(degist)) {
-                BaseException tre = new BaseException(PubErrorCode.PUB_SIGN_ERROR, "摘要验证错误，不是有效摘要信息，签文为：" + sign + "明文为：" + ming);
-                throw tre;
-            }
-        } catch (BaseException e) {
-        	throw LogUtil.handerEx(PubErrorCode.PUB_SIGN_EXCEPTION, "验证摘要失败，签文为：" + sign + "明文为：" + ming, e);
-        }
+//        try {
+//            String degist = new Sha256Hash(ming + SysParamUtil.getSysParValue("REQ_SALT")).toString(); // 摘要 = 明文 + 盐后
+//            if (!sign.equals(degist)) {
+//                BaseException tre = new BaseException(PubErrorCode.PUB_SIGN_ERROR, "摘要验证错误，不是有效摘要信息，签文为：" + sign + "明文为：" + ming);
+//                throw tre;
+//            }
+//        } catch (BaseException e) {
+//        	throw LogUtil.handerEx(PubErrorCode.PUB_SIGN_EXCEPTION, "验证摘要失败，签文为：" + sign + "明文为：" + ming, e);
+//        }
     }
 }

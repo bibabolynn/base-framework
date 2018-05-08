@@ -62,14 +62,14 @@ public class JSONUtil {
             conn.setRequestProperty("connection", "Keep-Alive");
             conn.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
             // 在系统参数里取连接超时时间
-            String connectTimeout =
-                    (SysParamUtil.getSysParValue("CONNECT_TIMEOUT") == null) || (SysParamUtil.getSysParValue("CONNECT_TIMEOUT") == "") ? "10000"
-                            : SysParamUtil.getSysParValue("CONNECT_TIMEOUT");
+            String connectTimeout ="";
+//                    (SysParamUtil.getSysParValue("CONNECT_TIMEOUT") == null) || (SysParamUtil.getSysParValue("CONNECT_TIMEOUT") == "") ? "10000"
+//                            : SysParamUtil.getSysParValue("CONNECT_TIMEOUT");
             LogUtil.info("http链接超时时间为：" + Integer.parseInt(connectTimeout) / 1000 + "秒");
             // 在系统参数里取读取连接响应的超时时间
-            String readTimeout =
-                    (SysParamUtil.getSysParValue("READ_TIMEOUT") == null) || (SysParamUtil.getSysParValue("READ_TIMEOUT") == "") ? "20000"
-                            : SysParamUtil.getSysParValue("READ_TIMEOUT");
+            String readTimeout = "";
+//                    (SysParamUtil.getSysParValue("READ_TIMEOUT") == null) || (SysParamUtil.getSysParValue("READ_TIMEOUT") == "") ? "20000"
+//                            : SysParamUtil.getSysParValue("READ_TIMEOUT");
             LogUtil.info("http链接响应时间为：" + Integer.parseInt(readTimeout) / 1000 + "秒");
             // 设置连接超时时间
             conn.setConnectTimeout(Integer.parseInt(connectTimeout));
@@ -171,14 +171,14 @@ public class JSONUtil {
             conn.setRequestProperty("connection", "Keep-Alive");
             conn.setRequestProperty("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
             // 在系统参数里取连接超时时间
-            String connectTimeout =
-                    (SysParamUtil.getSysParValue("CONNECT_TIMEOUT") == null) || (SysParamUtil.getSysParValue("CONNECT_TIMEOUT") == "") ? "10000"
-                            : SysParamUtil.getSysParValue("CONNECT_TIMEOUT");
+            String connectTimeout ="";
+//                    (SysParamUtil.getSysParValue("CONNECT_TIMEOUT") == null) || (SysParamUtil.getSysParValue("CONNECT_TIMEOUT") == "") ? "10000"
+//                            : SysParamUtil.getSysParValue("CONNECT_TIMEOUT");
             LogUtil.info("http链接超时时间为：" + Integer.parseInt(connectTimeout) / 1000 + "秒");
             // 在系统参数里取读取连接响应的超时时间
-            String readTimeout =
-                    (SysParamUtil.getSysParValue("READ_TIMEOUT") == null) || (SysParamUtil.getSysParValue("READ_TIMEOUT") == "") ? "20000"
-                            : SysParamUtil.getSysParValue("READ_TIMEOUT");
+            String readTimeout ="";
+//                    (SysParamUtil.getSysParValue("READ_TIMEOUT") == null) || (SysParamUtil.getSysParValue("READ_TIMEOUT") == "") ? "20000"
+//                            : SysParamUtil.getSysParValue("READ_TIMEOUT");
             LogUtil.info("http链接响应时间为：" + Integer.parseInt(readTimeout) / 1000 + "秒");
             // 设置连接超时时间
             conn.setConnectTimeout(Integer.parseInt(connectTimeout));
@@ -198,11 +198,14 @@ public class JSONUtil {
 
                 LogUtil.warn("Get返回result数据为：" + result);
                 if (sysCode != null & sysCode != "") {
-                    String sucKey = SysParamUtil.getAppDisplay("SUC_KEY", sysCode);
-                    String sucVal = SysParamUtil.getAppDisplay("SUC_VAL", sysCode);
-                    String sucTemp = SysParamUtil.getAppDisplay("SUC_TEMP", sysCode);
-                    String noThrowCode =
-                            SysParamUtil.getAppDisplay("NO_THROW_CODE", sysCode) == null ? "" : SysParamUtil.getAppDisplay("NO_THROW_CODE", sysCode);// 4000006,4001014,4001011
+                    String sucKey = "";
+//                            SysParamUtil.getAppDisplay("SUC_KEY", sysCode);
+                    String sucVal = "";
+//                            SysParamUtil.getAppDisplay("SUC_VAL", sysCode);
+                    String sucTemp = "";
+//                            SysParamUtil.getAppDisplay("SUC_TEMP", sysCode);
+                    String noThrowCode ="";
+//                            SysParamUtil.getAppDisplay("NO_THROW_CODE", sysCode) == null ? "" : SysParamUtil.getAppDisplay("NO_THROW_CODE", sysCode);// 4000006,4001014,4001011
                     if (result.startsWith(sucTemp)) { // 是否以标准返回为开头
                         if (result.contains(sucKey)) { // 是否包含正确返回码 例如retcode
                             JSONObject resultjson = new JSONObject();

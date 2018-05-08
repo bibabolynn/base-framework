@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.yuan.model.MUsers;
+import com.yuan.model.Users;
 import com.yuan.service.LoginService;
 import com.yuan.util.*;
 import com.yuan.util.constant.BussErrorCode;
@@ -55,17 +55,17 @@ public class LoginController {
             bodyJson.put("userId", userId);
             bodyJson.put("userPwd", userPwd);
             JSONObject userJson = HttpUtil.sendHttpRequest(bodyJson);
-            MUsers user = (MUsers) JSONUtil.jsonToBean(userJson, MUsers.class);
-            String userNo = user.getUserNo();
+            Users user = (Users) JSONUtil.jsonToBean(userJson, Users.class);
+            String userNo = user.getUserId();
             if (!"".equals(userNo)) {
                 String userValid = user.getUserValid();
                 if (!"0".equals(userValid)) { //有效的用户
                     mav = new ModelAndView("redirect:/service/login/index");
                     HttpSession session = getSession();
                     session.setAttribute("user", user);
-                    session.setAttribute("resList", resList);//权限下可操作的资源
+//                    session.setAttribute("resList", resList);//权限下可操作的资源
                 }
-                String firstLogin = user.getFirstlogin();
+                String firstLogin = user.getFirstLogin();
                 if (!"1".equals(firstLogin)) { //第一次登陆
                     mav = new ModelAndView("/updloginpassword");
                     HttpSession session = getSession();
@@ -88,7 +88,7 @@ public class LoginController {
     public ModelAndView loginPassword(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = getSession();
         ModelAndView mav = new ModelAndView("/updloginpassword");
-        MUsers user = (MUsers) session.getAttribute("user");
+        Users user = (Users) session.getAttribute("user");
         mav.addObject("users", user);
         return mav;
     }
@@ -179,7 +179,7 @@ public class LoginController {
 		Map<String, Object> map = ju.getMap(request);
 		JSONObject bodyJson = new JSONObject();
 		try {
-			MUsers user = (MUsers) SessionUtil.getSession().getAttribute("user");
+			Users user = (Users) SessionUtil.getSession().getAttribute("user");
 			String newPassword = map.getOrDefault("newPassword","").toString();
 			String oldPassword = map.getOrDefault("oldPassword","").toString();
 			   String userId =user.getUserId();
@@ -188,8 +188,8 @@ public class LoginController {
 	            bodyJson.put("newPassword", newPassword);
 	            //TODO 校验并修改
 	            //0：修改成功，1：新老密码不一致，2：旧密码或者用户号错误
-	            String updateFlagString = userJson.getString("updateFlag");
-	            updateFlag = Integer.parseInt(updateFlagString);
+//	            String updateFlagString = userJson.getString("updateFlag");
+//	            updateFlag = Integer.parseInt(updateFlagString);
 		} catch (Exception e) {
 			throw LogUtil.handerEx(BussErrorCode.ERROR_MANAGE_USER_F8, "修改登录密码Controller失败,参数为："+map, LogUtil.ERROR, e);
 		}

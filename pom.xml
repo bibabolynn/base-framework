@@ -419,17 +419,17 @@
             </exclusions>
         </dependency> -->
     </dependencies>
-    <profiles>
-        <profile>
-            <id>local</id>
-            <properties>
-                <package.environment>local</package.environment>
-            </properties>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-        </profile>
-    </profiles>
+    <!--<profiles>-->
+        <!--<profile>-->
+            <!--<id>local</id>-->
+            <!--<properties>-->
+                <!--<package.environment>local</package.environment>-->
+            <!--</properties>-->
+            <!--<activation>-->
+                <!--<activeByDefault>true</activeByDefault>-->
+            <!--</activation>-->
+        <!--</profile>-->
+    <!--</profiles>-->
     <build>
         <resources>
             <resource>
