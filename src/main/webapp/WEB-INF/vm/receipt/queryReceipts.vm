@@ -1,0 +1,43 @@
+#set($layout = "layout/null.vm")
+<link type="text/css" href="../../styles/icon.css" rel="stylesheet"/>
+<link type="text/css" href="../../styles/base.css" rel="stylesheet"/>
+<div >
+    <p style="padding-top:270px;" class="f14">没有找到回执单，请重新搜索</p>
+</div>
+<table class="check-container" data-container="list">
+    #foreach($receipt in $!receipts)
+        <tr>
+            <td>
+                <input id="receiptId" type="hidden"  value="$!{receipt.receiptId}"/>
+                <input id="receiptNo" type="hidden"  value="$!{receipt.receiptNo}"/>
+                <div class="list-pick">
+                    <li>客户：$!{receipt.customerName} </li>
+                    <li>
+                        <span class="ordercode" >
+                          序号：<a href="/receipt/queryById?$receipt.receiptId" target="_blank">$!receipt.receiptNo</a>
+                        </span></li>
+                    <li>总金额：
+                        <script type="text/javascript">
+                            var productSum = $!{receipt.totalMoney};
+                            document.write("￥" + productSum.toFixed(2));
+                        </script></li>
+                    <li>是否核实：
+                        #if($!{receipt.is_check} == 1)
+                            已核实
+                        #else
+                            未核实
+                        #end
+                    </li>
+                </div>
+            </td>
+        </tr>
+    #end
+</table>
+<div class="mt10">
+    <div class="page tr">#pageTag("/receipt/list", $page, $params)</div>
+</div>
+###end
+
+
+
+

@@ -8,9 +8,9 @@
             <properties>
                 <!--database config-->
                 <mvn.jdbc.driverClassName>com.mysql.jdbc.Driver</mvn.jdbc.driverClassName>
-                <mvn.jdbc.url>jdbc:mysql://ip:3306/databasename?characterEncoding=UTF-8;useUnicode=TRUE;autoReconnect=true</mvn.jdbc.url>
-                <mvn.jdbc.username></mvn.jdbc.username>
-                <mvn.jdbc.password></mvn.jdbc.password>
+                <mvn.jdbc.url>jdbc:mysql://localhost:3306/zhen_shi_door_business?characterEncoding=UTF-8;useUnicode=TRUE;autoReconnect=true</mvn.jdbc.url>
+                <mvn.jdbc.username>root</mvn.jdbc.username>
+                <mvn.jdbc.password>zz123123!</mvn.jdbc.password>
 
                 <!--redis config-->
                 <mvn.jedis.pool.maxTotal>500</mvn.jedis.pool.maxTotal>

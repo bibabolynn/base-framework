@@ -1,0 +1,419 @@
+<div id="content" align="center">
+    <div class="btn-container fixed top">
+        <button type="button" class="btn" id="btn-print-top">
+            <i class="icon-print"></i>打印回执单
+        </button>
+    </div>
+    <div id="printArea">
+        <input type="hidden" name="orderIds" value="${orderIds}">
+        #if($orderinfoMainDtoList.size()>0)
+            #set ($i=1)
+            #foreach($orderinfoMain in $orderinfoMainDtoList)
+                <div class="print-page A4 #if($i == $orderinfoMainDtoList.size())last-page#end">
+                    <table class="stock-out-sheet">
+                        <tbody>
+                        <tr>
+                            <td>
+                                <ul style="margin-left: 32px;">
+                                    <li class="pt10 fontsize24" style="padding-left: 6px;"> #if(${orderinfoMain.orderNo}&&$!{orderinfoMain.orderNo}!="") <span style="font-weight:bold;font-size:19px" >#$!{orderinfoMain.orderNo} </span> #end 拣货单</li>
+                                    <li class="pt10">
+                                        #if(${orderinfoMain.carrierNo})
+
+                                            #if($!{orderinfoMain.carrierNo}==2087||$!{orderinfoMain.carrierNo}=="2087")
+                                                <img class="barcode-image" src="#springUrl('')/barcode/generate?msg=$!{orderinfoMain.deliverNo}"   alt=""/>
+                                            #else
+                                                <img class="barcode-image" src="#springUrl('')/barcode/generate?msg=$!{orderinfoMain.orderId}"  alt=""/>
+                                            #end
+                                        #else
+                                            <img class="barcode-image" src="#springUrl('')/barcode/generate?msg=$!{orderinfoMain.orderId}"   alt=""/>
+                                        #end
+                                    </li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul style="width: 320px; padding-left: 20px;">
+                                    <li class="pt10">订单编号： $!{orderinfoMain.deliverNo}</li>
+                                    <li class="pt10">客户姓名： $!{orderinfoMain.fullname}</li>
+                                    <li class="pt10">客户电话： $!{orderinfoMain.mobile}</li>
+                                    <li class="pt10"><dl><dt>客户地址：</dt><dd style="margin-top: -20px; margin-left: 65px;">$!{orderinfoMain.fullAddress}</dd></dl></li>
+                                </ul>
+                            </td>
+                            <td>
+                                <ul style="text-align: right; width: 266px;">
+                                    <li class="pt10 fontsize24">应收金额:#if(${orderinfoMain.stationOrderPayment})￥$!{orderinfoMain.stationOrderPayment}
+                                    #else￥0.00#end
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="border-top: 1px solid #000;margin-left: 15px;width: 56%;">
+                                <ul style="padding-left: 24px;">
+                                    <li class="orderInfo-title pt10">预计送达时间： $!{orderinfoMain.surplusHour}</li>
+                                    <li class="pt10">是否有发票：
+                                        #if($!{orderinfoMain.invoiceState}==0)
+                                            是
+                                        #elseif($!{orderinfoMain.invoiceState}==1)
+                                            是
+                                        #elseif($!{orderinfoMain.invoiceState}==2)
+                                            否
+                                        #elseif($!{orderinfoMain.invoiceState}==3)
+                                            否
+                                        #end
+                                    </li>
+                                    <li class="pt10">订单备注：$!{orderinfoMain.newOrderinfoExtend.orderRemark}</li>
+                                    #if($orderinfoMain.newOrderinfoExtend &&
+                                    !(!$orderinfoMain.newOrderinfoExtend.ordererName && !$orderinfoMain.newOrderinfoExtend.ordererMobile)&&
+                                    ($!{orderinfoMain.newOrderinfoExtend.ordererName}!="" ||$!{orderinfoMain.newOrderinfoExtend.ordererMobile} !=""))
+                                        <li class="pt10">订购人姓名：$!{orderinfoMain.newOrderinfoExtend.ordererName}</li>
+                                        <li class="pt10">订购人电话：$!{orderinfoMain.newOrderinfoExtend.ordererMobile}</li>
+                                    #end
+                                </ul>
+                            </td>
+                            <td style="border-top: 1px solid #000;width: 20%;">
+                                <ul>
+                                    <li class="pt10">商品金额：￥$!{orderinfoMain.orderTotalPrice}</li>
+                                    <li class="pt10">运费金额：
+                                        #if(${orderinfoMain.newOrderinfoExtend.freightPrice})
+                                            ￥$!{orderinfoMain.newOrderinfoExtend.freightPrice}
+                                        #else
+                                            0.00
+                                        #end
+                                    </li>
+                                    <li class="pt10">礼品卡使用金额：
+                                        #if(${orderinfoMain.orderGiftCardDetailDTO} && ${orderinfoMain.orderGiftCardDetailDTO.orderGiftCardMoney})
+                                            ￥$!FenAndYuanTool.fromFenToYuan($!{orderinfoMain.orderGiftCardDetailDTO.orderGiftCardMoney})
+                                        #else
+                                            0.00
+                                        #end
+                                    </li>
+                                </ul>
+                            </td>
+                            <td style="border-top: 1px solid #000;width: 18%;">
+                                <ul>
+                                    <li class="pt10">商品优惠:
+                                        <span style="float:right;margin-right: 5px;">
+                                            #if(${orderinfoMain.goodsDiscountMoney})
+                                                ￥$!{orderinfoMain.goodsDiscountMoney}
+                                            #else
+                                                ￥0.00
+                                            #end
+                            </span>
+                                    </li>
+                                    <li class="pt10">运费优惠:
+                                        <span style="float:right;margin-right: 5px;">
+                                            #if(${orderinfoMain.freightDiscountMoney})
+                                                ￥$!{orderinfoMain.freightDiscountMoney}
+                                            #else
+                                                ￥0.00
+                                            #end
+                            </span>
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:560px;margin-bottom: 50px;"></td>
+                            <td class="fontsize24">客户签名：</td>
+                        </tr>
+
+                        <tr>
+                            <td class="wrap" style="width: 642px;border-top: 1px dashed #000;margin-left: 15px;">
+                                <ul style="padding-left: 24px;">
+                                    <li class="pt10 fontsize24">京东到家</li>
+                                    <li class="pt10">订单编号：$!{orderinfoMain.o2oOrderId}</li>
+                                    <li>门店名称：$!{orderinfoMain.stationName}</li>
+                                </ul>
+                            </td>
+                            <td style="width: 100px;border-top: 1px dashed #000;">
+                                <ul>
+                                    <li class="pt10 fontsize24">客户留存</li>
+                                    <li class="pt10">&nbsp;</li>
+                                    <li><span style="float:right;margin-right: 5px;">总件数:$!{orderinfoMain.sumProduct}</span></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">
+                                <div class="check-container">
+                                    <table class="ware-list">
+
+                                        <tbody>
+                                        <tr>
+                                            <td>商品编码</td>
+                                            <td>商家商品编码</td>
+                                            <td>商品名称</td>
+                                            <td>数量</td>
+                                            <td>价格</td>
+                                            <td>小计</td>
+                                        </tr>
+                                            #if($orderinfoMain.listOrderinfoproduct.size()>0)
+                                                #foreach($product in $orderinfoMain.listOrderinfoproduct)
+                                                    #set($index=$velocityCount - 1)
+                                                <tr >
+                                                    <td  id="skuIdTd_$!{index}" >
+                                                        $!{product.skuId}
+                                                    </td>
+                                                    <td  id="skuIdTd_$!{index}" >
+                                                        $!{product.outerSkuId}
+                                                    </td>
+                                                    <td  id="skuNameTd_$!{index}" >
+                                                        $!{product.skuName}
+                                                    </td>
+                                                    <td  id="itemTotalTd_$!{index}" >
+                                                        $!{product.itemTotal}
+                                                    </td>
+                                                    <td  id="jdPriceTd_$!{index}" >
+                                                        $!{product.jdPrice}
+                                                    </td>
+                                                    <td  id="totalTd_$!{index}" >
+                                                        <script type="text/javascript">
+                                                            var totolPrice = $!{product.itemTotal} * $!{product.jdPrice};
+                                                            document.write("￥" + totolPrice.toFixed(2));
+                                                        </script>
+                                                    </td>
+                                                </tr>
+                                                #end
+                                            #end
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+                    </br>
+                </div>
+                #set($i=$i+1)
+            #end
+        #end
+    </div>
+
+    <div class="btn-container fixed bottom">
+        <button type="button" class="btn" id="btn-print-bottom">
+            <i class="icon-print"></i>打印出库单
+        </button>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btn-print-top,#btn-print-bottom").bind("click", function () {
+                $(".btn-container").hide();
+                window.print(); // 开始打印
+                $(".btn-container").show();
+
+            });
+            $("#btn-print-back").click(function (e) {
+                Commons.closeModalDialog();
+            });
+        });
+    </script>
+    <style>
+        #printArea {
+            background: none repeat scroll 0 0 #FFFFFF;
+            color: #000000;
+            font-family: "宋体";
+            margin-top: 50px;
+            padding-bottom: 50px;
+        }
+
+        .print-page {
+            page-break-before: auto;
+            page-break-after: always;
+        }
+
+        .last-page {
+            page-break-after: auto;
+        }
+
+        .A4 {
+            width: 210mm;
+        }
+
+        .stock-out-sheet, .order-ware-sheet {
+            border: 1px solid #000000;
+            width: 100%;
+        }
+
+        .stock-out-sheet {
+            /*border-bottom: 0 none;*/
+        }
+
+        .order-ware-sheet {
+        }
+
+        #printArea table tbody tr td {
+            padding: 3px 3px 10px;
+        }
+
+        .sheet-label {
+            font-size: 12px;
+            text-align: right;
+        }
+
+        .sheet-text {
+            font-size: 12px;
+            text-align: left;
+        }
+
+        .col1 {
+            width: 12%;
+        }
+
+        .col2 {
+            width: 20%;
+        }
+
+        .col3 {
+            width: 20%;
+        }
+
+        .col4 {
+            width: 20%;
+        }
+
+        .col5 {
+            width: 25%;
+        }
+
+        #printArea table tbody tr td.sheet-title {
+            font-family: '新宋体';
+            font-size: 20px;
+            font-weight: bold;
+            padding: 12px 0 5px 20px;
+            text-align: left;
+        }
+
+        .stock-out-title {
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .stock-out-barcode {
+        }
+
+        .barcode-image {
+            width: 120px;
+            height: 80px;
+        }
+
+        .text-important {
+            color: #D13736;
+        }
+
+        .money-container {
+            border: 1px solid #D13736;
+            width: 60%;
+            padding: 2px;
+            text-align: right;
+        }
+
+        .money-label {
+            font-weight: bold;
+            padding: 3px 0 5px 5px;
+            text-align: left;
+        }
+
+        .money-number {
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .money-unit {
+            padding-left: 2px;
+        }
+
+        #printArea table tbody tr td.orderInfo-title {
+            text-align: left;
+            font-size: 15px;
+            font-weight: bold;
+            padding: 2px 0 5px 20px;
+        }
+
+        .sign-container {
+            border: 1px solid #DFDFDF;
+            width: 85%;
+            padding: 3px;
+        }
+
+        .sign-desc {
+        }
+
+        .sign-content {
+            height: 42px;
+        }
+
+        .sign-date {
+            text-align: right;
+        }
+
+        .ware-list {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        #printArea table.ware-list tbody tr td {
+            border: 1px solid #ccc;
+            padding: 5px;
+            min-height: 22px;
+            float: none;
+        }
+
+        #printArea table.ware-list tbody tr td.ware-name {
+            text-align: left;
+        }
+
+        .ware-list .col1 {
+            width: 10%;
+        }
+
+        .ware-list .col2 {
+            width: 15%;
+        }
+
+        .ware-list .col3 {
+            width: 46%;
+        }
+
+        .ware-list .col4 {
+            width: 8%;
+        }
+
+        .ware-list .col5 {
+            width: 8%;
+        }
+
+        .ware-list .col6 {
+            width: 12%;
+        }
+
+        .btn-container.fixed {
+            background-color: #F6F6F6;
+            height: 40px;
+            overflow: hidden;
+            position: fixed;
+            text-align: center;
+            width: 100%;
+            z-index: 10;
+        }
+
+        .btn-container.fixed.bottom {
+            bottom: 0;
+            padding-top: 10px;
+        }
+
+        .btn-container.fixed.top {
+            margin: 0;
+            padding-top: 10px;
+            top: 0;
+        }
+
+
+
+
+
+
+    </style>
+

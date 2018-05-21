@@ -1,4 +1,4 @@
-#if($breadCrumbsList && $breadCrumbsList.size() > 0)
+    #if($breadCrumbsList && $breadCrumbsList.size() > 0)
 <ul class="breadcrumb">
     #foreach( $data in ${breadCrumbsList})
         #set($lastNum=$breadCrumbsList.size() - $!{velocityCount})

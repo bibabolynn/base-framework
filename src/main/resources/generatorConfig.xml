@@ -3,21 +3,21 @@
 		"http://mybatis.org/dtd/mybatis-generator-config_1_3.dtd" >
 <generatorConfiguration >
 	<!-- 设置mysql驱动路径 下面取的是绝对路径，要与项目所在路径一致 -->
-	<classPathEntry location="C:/maven-3.3/apache-maven-3.3.3/repository/mysql/mysql-connector-java/5.1.22/mysql-connector-java-5.1.22.jar"/> 
+	<classPathEntry location="/Users/lynn/Downloads/maven/respository/mysql/mysql-connector-java/8.0.11/mysql-connector-java-8.0.11.jar"/>
 	<!-- 此处指定生成针对MyBatis3的DAO -->
 	<context id="mysql"  targetRuntime="MyBatis3">
 		<!-- 用来除去时间信息的，这在配合类似subversion的代码管理工具时使用很有效，因为可以减少没有必要的注释迁入 -->
 		<commentGenerator>
 			<!-- 是否取消注释 --> 
-			<!-- <property name="suppressAllComments" value="false"/> -->
+			<property name="suppressAllComments" value="true"/>
 			<!-- 是否生成注释代时间戳-->
 			<property name="suppressDate" value="true" />
 		</commentGenerator>
 		
 		<!-- jdbc连接信息 -->
-		<jdbcConnection driverClass="com.mysql.jdbc.Driver"  
-			connectionURL="jdbc:mysql://ip:3306/projectname"
-			userId="" password="" />
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/zhen_shi_door_business?characterEncoding=UTF8&amp;useUnicode=TRUE&amp;autoReconnect=true"
+			userId="root" password="zz123123!" />
 			
 		<!-- javaTypeResolver式类型转换的信息 -->
 		<javaTypeResolver>
@@ -27,21 +27,21 @@
 		
 		<!-- 模型对象 -->
 		<javaModelGenerator targetPackage="com.yuan.model"
-			targetProject="projectname">
+			targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" /> 
 			<!-- 是否针对string类型的字段在set的时候进行trim调用 -->   
 			<property name="trimStrings" value="true" />  
 		</javaModelGenerator>  
 		
 		<!-- XML映射文件 -->
-		<sqlMapGenerator targetPackage="com.ubillion.dao.xml"  
-			targetProject="riskmanage">  
+		<sqlMapGenerator targetPackage="com.yuan.dao.xml"
+			targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />  
 		</sqlMapGenerator>  
 		
 		<!-- 接口 -->
 		<javaClientGenerator type="XMLMAPPER"  
-			targetPackage="com.ubillion.dao" targetProject="riskmanage">  
+			targetPackage="com.yuan.dao" targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />  
 		</javaClientGenerator> 
 
@@ -67,7 +67,7 @@
 		       		 </table>
 	    		-->
 	    <!-- 默认使用配置 -->	
-		<table tableName="r_type" 
+		<table tableName="single_order"
 			enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"  enableUpdateByExample="false"/>
 		
 	</context>

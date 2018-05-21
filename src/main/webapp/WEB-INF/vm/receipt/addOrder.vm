@@ -1,0 +1,243 @@
+<div class="base-page-content">
+##    <div class="crumbs">
+##        <ol>
+##            <li class="pre"><a href="#"><span class="icon-home"></span>门店系统<i></i></a></li>
+##            <li class="cur"><a href="javascript:void(0);">基础资料管理<i></i></a></li>
+##            <li class="cur"><a href="javascript:void(0);">店铺配送设置</a></li>
+##        </ol>
+##    </div>
+    <div>
+        <div>
+            <form action="" method="POST" id="searchForm">
+                <div class="border_B mb10 pb10">
+                    <table class="viewTable ml20 mt10">
+                        <tbody>
+                        <tr>
+                            <td class="textL">
+                                <b style="color:red" >*</b>
+                                <label class="required">型号:</label>
+##                                <input type="text" class="{required:true,messages:{required:'请输入本地购运费'},digits:true}" value="$!{standardDelivery.localShipmentMoney}" style="width:20px;height:10px" name="localShipmentMoney" id="localShipmentMoney">元,满
+                                <input type="text" class="{required:true}" style="width:20px;height:10px"  name="doorType" >
+                            </td>
+                            <td class="textL">
+                                <b style="color:red" >*</b>
+                                <label class="required">颜色:</label>
+                                <input type="text" class="{required:true}" style="width:20px;height:10px"  name="color" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="textL" colspan="2">
+                                <b style="color:red" >*</b>
+                                <label class="required">洞口尺寸:</label>
+                                <input type="text" class="{required:true}" style="width:20px;height:10px"  name="holeHeight" >*
+                                <input type="text" class="{required:true}" style="width:20px;height:10px"  name="holeWide" >*
+                                <input type="text" class="{required:true}" style="width:20px;height:10px"  name="holeThick" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="textL">
+                                <b style="color:red" >*</b>
+                                <label class="required">板:</label>
+                            ##                                <input type="text" class="{required:true,messages:{required:'请输入本地购运费'},digits:true}" value="$!{standardDelivery.localShipmentMoney}" style="width:20px;height:10px" name="localShipmentMoney" id="localShipmentMoney">元,满
+                                <input type="text" class="{required:true}" style="width:20px;height:10px"  name="doorType" >
+                            </td>
+                            <td class="textL">
+                                <b style="color:red" >*</b>
+                                <label class="required">口线:</label>
+                                <input type="text" class="{required:true}" style="width:20px;height:10px"  name="color" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="textL">
+                                <b style="color:red" >*</b>
+                                <label class="required">漆:</label>
+                            ##                                <input type="text" class="{required:true,messages:{required:'请输入本地购运费'},digits:true}" value="$!{standardDelivery.localShipmentMoney}" style="width:20px;height:10px" name="localShipmentMoney" id="localShipmentMoney">元,满
+                                <input type="text" class="{required:true}" style="width:20px;height:10px"  name="doorType" >
+                            </td>
+                            <td class="textL">
+                                <b style="color:red" >*</b>
+                                <label class="required">银角:</label>
+                                <input type="text" class="{required:true}" style="width:20px;height:10px"  name="color" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="textL">
+                                <b style="color:red" >*</b>
+                                <label class="required">套版:</label>
+                            ##                                <input type="text" class="{required:true,messages:{required:'请输入本地购运费'},digits:true}" value="$!{standardDelivery.localShipmentMoney}" style="width:20px;height:10px" name="localShipmentMoney" id="localShipmentMoney">元,满
+                                <input type="text" class="{required:true}" style="width:20px;height:10px"  name="doorType" >
+                            </td>
+                            <td class="textL">
+                                <b style="color:red" >*</b>
+                                <label class="required">备注:</label>
+                                <input type="text"  style="width:20px;height:10px"  name="color" >
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="textL">
+                                <b style="color:red" >*</b>
+                                <label class="required">单价:</label>
+                            ##                                <input type="text" class="{required:true,messages:{required:'请输入本地购运费'},digits:true}" value="$!{standardDelivery.localShipmentMoney}" style="width:20px;height:10px" name="localShipmentMoney" id="localShipmentMoney">元,满
+                                <input type="text" class="{required:true}" style="width:20px;height:10px"  name="doorType" >
+                            </td>
+                            <td class="textL">
+                                <b style="color:red" >*</b>
+                                <label class="required">数量:</label>
+                                <input type="text" class="{required:true，digits:true}" style="width:20px;height:10px"  name="color" >
+                            </td>
+                        </tr>
+##                        <tr>
+##                            <td class="form-text">
+##                                <span class="checkbox-group-item">
+##                                    <input type="checkbox" name="nationalSales" id="nationalSales"
+##                                           onchange="changeMode();" value="1"/>
+##                                </span>
+##                                <b>支持全国销售：</b>
+##                            </td>
+##                        </tr>
+##                        <tr>
+##                            <td class="form-text">
+##                                <b>支持全国销售的门店：</b>
+##                                <input type="text" class="{required:true,messages:{required:'请选择全国销售门店'}}" readonly="readonly"
+##                                       onclick="javascript:chosestation();" value="$!{standardDelivery.stationName}" name="stationName" id="stationName"/>
+##                                <input type="hidden" readonly="readonly"  name="stationNo" id="stationNo" value="$!{standardDelivery.stationNo}"/>
+##
+##                            </td>
+##                            <td class="textL">
+##                                <label for="" class="mr10">销售范围:</label>
+##                                <button type="button" id="stationDeliveryStatus" class="btn" onclick="maintainDis()">
+##                                    <i class="icon-white" ></i>未维护
+##                                </button>
+##                            </td>
+##                        </tr>
+##                        <tr>
+##                            <td class="textL">
+##                                <b style="color:red" >*</b>
+##                                <label class="required">运费设置:</label>
+##                                <input type="text" class="{required:true,messages:{required:'请输入运费'},digits:true}" value="$!{standardDelivery.shipmentMoney}" style="width:20px;height:10px" name="shipmentMoney" id="shipmentMoney">元,满
+##                                <input type="text" class="{digits:true}" style="width:20px;height:10px" value="$!{standardDelivery.chargeFull}" name="chargeFull" id="chargeFull">元免运费
+##                            </td>
+##                            <td>
+##                                <b style="color:#FF644E;font-size:11px;" >
+##                                    温馨提示：运费必填，满减金额可不填写，如不填写，即不满免
+##                                </b>
+##                            </td>
+##                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="textL mt20 mb10">
+                    <button type="button" onclick="saveOrder();">
+                        <i class="icon-save"></i>保存
+                    </button>
+                    <button type="button"  onclick="cancel();">
+                        <i class="icon-white"></i>取消
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    //初始化
+    $(document).ready(function(){
+
+
+    });
+
+
+##    //为下拉赋值
+##    function getStationNo(venderId) {
+##        jQuery.ajax({
+##            type: 'POST',
+##            async: false,
+##            url: '#springUrl('')/storeDispatching/getStationNoById.json',
+##            cache: false,
+##            data: {
+##                "venderId": venderId
+##            },
+##            success: function (data) {
+##                StoreSelectOption = "<option value='0'>请选择</option>";
+##                if (null != data && data != '') {
+##                    for (var i = 0; i < data.length; i++) {
+##                        StoreSelectOption += "<option value='" + data[i].stationNo+ "'>" + data[i].stationName + "</option>  ";
+##                    }
+##                }
+##                $('#sationlNo').append(StoreSelectOption);
+##            },
+##            error: function (jqXHR, errorThrown) {
+##                alert(errorThrown);
+##            }
+##        });
+##    }
+    //校验
+    var $validateForm = $("#searchForm").validate();
+
+    //确认保存
+    function saveOrder(){
+        var stationNo = $("#stationNo").val();
+        var shipmentMoney = $("#shipmentMoney").val();
+        var localShipmentMoney = $("#localShipmentMoney").val();
+        //验证数据是否为空
+        if(localShipmentMoney==null||localShipmentMoney==''){
+            Commons.showError("请输入本地购运费");
+            return false;
+        }
+        if($("#nationalSales").attr('checked')){
+            if(stationNo==null||stationNo==''){
+                Commons.showError("请选择门店");
+                return false;
+            }
+            if(shipmentMoney==null||shipmentMoney==''){
+                Commons.showError("请输入运费");
+                return false;
+            }
+        }
+        jQuery.ajax({
+            type: "POST",
+            cache: false, //无缓存 Jquery会给每个请求加一个随即数
+            url: springUrl("/standardDispatching/addOrEditStandard.json"), //提交的url 请求下级地址
+            data: {
+                "standardParamJson": standardJsonString()
+            },
+            beforeSend: function () {  //提交前验证
+                if (!$validateForm.checkForm()) {
+                    return false;
+                }
+                Commons.showProcessMsg(Commons.config.default_process_msg);
+            },
+            success: function (data) {    //请求成功的方法
+                Commons.hideProcessMsg();
+                if(data.flag){
+                    Commons.showSuccess("保存成功！");
+                    $("#idPage").val(data.idPage);
+                }else{
+                    Commons.showError("保存失败！");
+                }
+            },
+            error: function () {
+                Commons.showError("请求失败的方法");
+            }
+        });
+
+    }
+    //封装参数
+    function standardJsonString() {
+        var standardParam = {};
+        standardParam.idPage = $("#idPage").val();
+//    standardParam.stationNo = $("#stationNo").val();
+//    standardParam.stationNo = "100000009";
+        standardParam.venderId = $("#venderId").val();
+        standardParam.stationName = $("#stationName").val();
+        standardParam.chargeFull = $('#chargeFull').val();
+        standardParam.shipmentMoney = $("#shipmentMoney").val();
+        standardParam.localChargeFull = $('#localChargeFull').val();
+        standardParam.localShipmentMoney = $("#localShipmentMoney").val();
+        if($("#nationalSales").attr('checked')){
+            standardParam.nationalSales = 1;
+        }
+        return  JSON.stringify(standardParam);
+    }
+
+
+</script>

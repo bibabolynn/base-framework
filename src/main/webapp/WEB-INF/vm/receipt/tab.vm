@@ -1,0 +1,185 @@
+#set($layout = "layout/null.vm")
+<!DOCTYPE html>
+<html>
+<head>
+    <title>甄氏门业</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    #parse("/common/import.v2.0.vm")
+    <link rel="stylesheet" type="text/css" href="#springUrl('')/static/style/business/pick_page.css"/>
+    <link rel="stylesheet" type="text/css" href="#springUrl('')/static/style/business/mark.css"/>
+    <link rel="stylesheet" type="text/css" href="#springUrl('')/static/style/business/material/material.css"/>
+    <script>seajs.use("js/business/pick/pick_es");</script>
+    <script>seajs.use("js/business/order/order-exception");</script>
+
+    <script type="text/javascript" src="#springUrl('/static/scripts/jquery.js')"></script>
+
+</head>
+<body>
+<div class="common-page" id="pageAudit">
+
+    <div class="tabs" id="tab1" select="one" toggle="click">
+        <div class="tab-head">
+            <ul class="tab-nav">
+                <li><a href="#@">钢木门客户回执单<span class="red pl10 f14"></span></a></li>
+                <li><a href="#@">钢木门生产通知单<span class="red pl10 f14"></span></a></li>
+                <li><a href="#@">生态门客户回执单<span class="red pl10 f14"></span></a></li>
+                <li><a href="#@">生态门生产通知单<span class="red pl10 f14"></span></a></li>
+            </ul>
+        </div>
+        <div class="tab-body">
+            <div class="panel" id="one" tar-id="one">
+                <!--检索模块-->
+                <div class="search">
+                    <form action="/receipt/list">
+                        <table>
+                            <tr>
+                                <input name="doorCategory" type="hidden" value="1">
+                                <input name="type" type="hidden" value="1">
+                                <th>回执单编号</th>
+                                <td><input name="receiptId" type="text" placeholder="回执单编号"></td>
+                                <th>客户姓名</th>
+                                <td><input type="text" name="customerName"/></td>
+                                <th class="opt-th"></th>
+                                <td class="w140">
+                                    <input class="button bg-green mr10 query" type="button" value="查 询">
+                                    <input class="button bg-green" type="reset" value="清 空">
+                                </td>
+                            </tr>
+                            <tr class="none">
+                                <th>创建时间</th>
+                                <td><input id="createTime_begin" type="text" name="createTime_begin"
+                                           onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'${timeset}',maxDate:'${timecurrent}'})">
+                                </td>
+                                <th>至</th>
+                                <td><input id="createTime_end" type="text" name="createTime_end"
+                                           onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'${timeset}',maxDate:'${timecurrent}'})">
+                                </td>
+                            </tr>
+
+                        </table>
+                    </form>
+                </div>
+                <!--列表-->
+                <div class="picklist table f14"></div>
+                <!--列表结束-->
+            </div>
+            <div class="panel" id="two" tar-id="two">
+                <!--检索模块-->
+                <div class="search">
+                    <form action="/productOrder/list">
+                        <table>
+                            <tr>
+                                <input name="doorCategory" type="hidden" value="1">
+                                <input name="type" type="hidden" value="1">
+                                <th>回执单编号</th>
+                                <td><input name="receiptId" type="text" placeholder="回执单编号"></td>
+                                <th>客户姓名</th>
+                                <td><input type="text" name="customerName"/></td>
+                                <th class="opt-th"></th>
+                                <td class="w140">
+                                    <input class="button bg-green mr10 query" type="button" value="查 询">
+                                    <input class="button bg-green" type="reset" value="清 空">
+                                </td>
+                            </tr>
+##                            <tr class="none">
+##                                <th>创建时间</th>
+##                                <td><input id="createTime_begin" type="text" name="createTime_begin"
+##                                           onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'${timeset}',maxDate:'${timecurrent}'})">
+##                                </td>
+##                                <th>至</th>
+##                                <td><input id="createTime_end" type="text" name="createTime_end"
+##                                           onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'${timeset}',maxDate:'${timecurrent}'})">
+##                                </td>
+##                            </tr>
+
+                        </table>
+                    </form>
+                </div>
+                <input class="button bg-blue" id="btn-productOrder-print" type="button" value="打印">
+                <!--列表-->
+                <div class="picklist table f14"></div>
+                <!--列表结束-->
+            </div>
+            <div class="panel" id="three" tar-id="three">
+                <!--检索模块-->
+                <div class="search">
+                    <form action="/receipt/list">
+                        <table>
+                            <tr>
+                                <input name="doorCategory" type="hidden" value="0">
+                                <input name="type" type="hidden" value="1">
+                                <th>回执单编号</th>
+                                <td><input name="receiptId" type="text" placeholder="回执单编号"></td>
+                                <th>客户姓名</th>
+                                <td><input type="text" name="customerName"/></td>
+                                <th class="opt-th"></th>
+                                <td class="w140">
+                                    <input class="button bg-green mr10 query" type="button" value="查 询">
+                                    <input class="button bg-green" type="reset" value="清 空">
+                                </td>
+                            </tr>
+                            <tr class="none">
+                                <th>创建时间</th>
+                                <td><input id="createTime_begin" type="text" name="createTime_begin"
+                                           onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'${timeset}',maxDate:'${timecurrent}'})">
+                                </td>
+                                <th>至</th>
+                                <td><input id="createTime_end" type="text" name="createTime_end"
+                                           onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'${timeset}',maxDate:'${timecurrent}'})">
+                                </td>
+                            </tr>
+
+                        </table>
+                    </form>
+                </div>
+
+                <!--列表-->
+                <div class="picklist table f14"></div>
+                <!--列表结束-->
+            </div>
+            <div class="panel" id="four" tar-id="four">
+                <div class="search">
+                    <form action="/productOrder/list">
+                        <table>
+                            <tr>
+                                <input name="doorCategory" type="hidden" value="1">
+                                <input name="type" type="hidden" value="1">
+                                <th>回执单编号</th>
+                                <td><input name="receiptId" type="text" placeholder="回执单编号"></td>
+                                <th>客户姓名</th>
+                                <td><input type="text" name="customerName"/></td>
+                                <th class="opt-th"></th>
+                                <td class="w140">
+                                    <input class="button bg-green mr10 query" type="button" value="查 询">
+                                    <input class="button bg-green" type="reset" value="清 空">
+                                </td>
+                            </tr>
+                        ##                            <tr class="none">
+                        ##                                <th>创建时间</th>
+                        ##                                <td><input id="createTime_begin" type="text" name="createTime_begin"
+                        ##                                           onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'${timeset}',maxDate:'${timecurrent}'})">
+                        ##                                </td>
+                        ##                                <th>至</th>
+                        ##                                <td><input id="createTime_end" type="text" name="createTime_end"
+                        ##                                           onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'${timeset}',maxDate:'${timecurrent}'})">
+                        ##                                </td>
+                        ##                            </tr>
+
+                        </table>
+                    </form>
+                </div>
+                <input class="button bg-blue" id="btn-productOrder-print" type="button" value="打印">
+                <!--列表-->
+                <div class="picklist table f14"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    //导出订单信息
+    $("#btn-orderProduct-print").bind("click",function(){
+
+    });
+</script>
+</html>

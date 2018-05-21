@@ -16,9 +16,12 @@ import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 
+import javax.annotation.Resource;
+
 /**
  *
  */
+@Resource
 public abstract class RedisCommon extends RedisTemplate<String, Object> {
 
 	private static Logger logger = LoggerFactory.getLogger(RedisCommon.class);

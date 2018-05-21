@@ -1,0 +1,96 @@
+#set($layout = "layout/null.vm")
+<link type="text/css" href="../../styles/icon.css" rel="stylesheet"/>
+<link type="text/css" href="../../styles/base.css" rel="stylesheet"/>
+<div >
+    <p style="padding-top:270px;" class="f14">没有找到生产通知单，请重新搜索</p>
+</div>
+<div class="widget-body">
+    <div class="widget-main no-padding">
+        <table class="table table-striped table-bordered table-hover">
+        #foreach($receipt in $!receipts)
+            <thead>
+            <th>货单号</th>
+            <th>客户名称</th>
+            <th>型号</th>
+            <th>颜色</th>
+            <th>洞口尺寸</th>
+            <th>板</th>
+            <th>门扇尺寸</th>
+            <th>口线</th>
+            <th>漆</th>
+            <th>数量</th>
+            <th>银角</th>
+            <th>套版</th>
+            <th>备注</th>
+            <th>单价</th>
+            <th>金额</th>
+            <th>操作</th>
+            </thead>
+            <tbody>
+                #foreach($!order in $!orderList)
+                <tr>
+                    <td class="textL">
+                        $!{order.orderId}
+                    </td>
+                    <td class="textL">
+                        $!receipt.customerName
+                    </td>
+                    <td class="textL">
+                        $!order.doorType
+                    </td>
+                    <td class="textL">
+                        $!order.color
+                    </td>
+                    <td class="textL">
+                        $!order.holeHeight*$!order.holeWide*$!order.holeThick
+                    </td>
+                    <td class="textL">
+                        $!order.plate
+                    </td>
+                    <td class="textL">
+                        $!order.doorHeight*$!order.doorWide
+                    </td>
+                    <td class="textL">
+                        $!order.architrave
+                    </td>
+                    <td class="textL">
+                        $!order.paint
+                    </td>
+                    <td class="textL">
+                        $!order.number
+                    </td>
+                    <td class="textL">
+                        $!order.silverCorner
+                    </td>
+                    <td class="textL">
+                        $!order.sleevePlate
+                    </td>
+                    <td class="textL">
+                        $!order.remark
+                    </td>
+                    <td class="textL">
+                        $!order.price
+                    </td>
+                    <td class="textL">
+                        $!order.totalMoney
+                    </td>
+                    <td>
+                        <input class="button bg-green" type="button" value="修改">
+                        <input class="button bg-green" type="button" value="保存">
+                    </td>
+                </tr>
+                #end
+            </tbody>
+        #end
+        </table>
+
+    </div>
+</div>
+<div class="mt10">
+    <div class="page tr">#pageTag("/receipt/list", $page, $params)</div>
+</div>
+###end
+
+
+
+

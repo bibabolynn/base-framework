@@ -22,11 +22,15 @@ import java.util.List;
 import java.util.Map;
 
 
+import com.yuan.controller.ReceiptController;
 import com.yuan.util.constant.PubErrorCode;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class JSONUtil {
+    private static final Logger logger = LoggerFactory.getLogger(JSONUtil.class);
     public static Map<String, String> bankMap = new HashMap<String, String>();
 
 
@@ -284,9 +288,9 @@ public class JSONUtil {
      * @return json
      * @throws BaseException
      */
-    public static JSONObject beanToJson(Object bean) throws BaseException {
+    public static JSONObject beanToJson(Object bean)  {
+        JSONObject json = new JSONObject();
         try {
-            JSONObject json = new JSONObject();
             if (bean != null) {
                 /* 转化部分 */
                 BeanInfo beanInfo = Introspector.getBeanInfo(bean.getClass());
@@ -302,10 +306,10 @@ public class JSONUtil {
                     }
                 }
             }
-            return json;
         } catch (Exception e) {
-            throw LogUtil.handerEx(PubErrorCode.PUB_BEAN_TO_JSON, "bean转换成json失败", LogUtil.EMPTY, e);
+            logger.error("error",e);
         }
+        return json;
     }
     /**
      * javabean转化为map

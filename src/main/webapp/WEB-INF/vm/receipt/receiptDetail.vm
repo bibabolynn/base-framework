@@ -1,0 +1,506 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+##    <style type="text/css">
+##        .popover {
+##            max-width : none !important;
+##        }
+##        body{
+##            margin: 3px 6px 3px 6px;
+##            background: none repeat scroll 0 0 #FAFAFA;
+##            border: 1px solid #90C0E9;/*#E6E6E6*/
+##            border-radius: 5px;
+##            box-shadow: 1px 2px 2px #809be9;
+##            background:#FFFFFF;
+##            padding: 6px;
+##            position: relative;
+##            min-width: 832px;
+##            width: expression(document.body.clientWidth < 832 ? "832px": "auto" ); !** 支持IE *!
+##            min-height: 500px;
+##            height: expression(document.body.clientHeight < 500 ? "500px": "auto" ); !** 支持IE *!
+##            margin: 0 10% 0 10%;
+##        }
+##
+##        .table-striped > tbody > tr:nth-child(2n+1) > td, .table-striped > tbody > tr:nth-child(2n+1) > th {
+##            background-color: #eef6fc;
+##        }
+##
+##        .table-hover > tbody > tr:hover > td,
+##        .table-hover > tbody > tr:hover > th {
+##            background-color: #bce8f1;
+##        }
+##    </style>
+    <style>
+        #printArea {
+            background: none repeat scroll 0 0 #FFFFFF;
+            color: #000000;
+            font-family: "宋体";
+            margin-top: 50px;
+            padding-bottom: 50px;
+        }
+
+        .print-page {
+            page-break-before: auto;
+            page-break-after: always;
+        }
+
+        .last-page {
+            page-break-after: auto;
+        }
+
+        .A4 {
+            width: 210mm;
+        }
+
+        .stock-out-sheet, .order-ware-sheet {
+            border: 1px solid #000000;
+            width: 100%;
+        }
+
+        .stock-out-sheet {
+            /*border-bottom: 0 none;*/
+        }
+
+        .order-ware-sheet {
+        }
+
+        #printArea table tbody tr td {
+            padding: 3px 3px 10px;
+        }
+
+        .sheet-label {
+            font-size: 12px;
+            text-align: right;
+        }
+
+        .sheet-text {
+            font-size: 12px;
+            text-align: left;
+        }
+
+        .col1 {
+            width: 12%;
+        }
+
+        .col2 {
+            width: 20%;
+        }
+
+        .col3 {
+            width: 20%;
+        }
+
+        .col4 {
+            width: 20%;
+        }
+
+        .col5 {
+            width: 25%;
+        }
+
+        #printArea table tbody tr td.sheet-title {
+            font-family: '新宋体';
+            font-size: 20px;
+            font-weight: bold;
+            padding: 12px 0 5px 20px;
+            text-align: left;
+        }
+
+        .stock-out-title {
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .stock-out-barcode {
+        }
+
+        .barcode-image {
+            width: 120px;
+            height: 80px;
+        }
+
+        .text-important {
+            color: #D13736;
+        }
+
+        .money-container {
+            border: 1px solid #D13736;
+            width: 60%;
+            padding: 2px;
+            text-align: right;
+        }
+
+        .money-label {
+            font-weight: bold;
+            padding: 3px 0 5px 5px;
+            text-align: left;
+        }
+
+        .money-number {
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .money-unit {
+            padding-left: 2px;
+        }
+
+        #printArea table tbody tr td.orderInfo-title {
+            text-align: left;
+            font-size: 15px;
+            font-weight: bold;
+            padding: 2px 0 5px 20px;
+        }
+
+        .sign-container {
+            border: 1px solid #DFDFDF;
+            width: 85%;
+            padding: 3px;
+        }
+
+        .sign-desc {
+        }
+
+        .sign-content {
+            height: 42px;
+        }
+
+        .sign-date {
+            text-align: right;
+        }
+
+        .ware-list {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        #printArea table.ware-list tbody tr td {
+            border: 1px solid #ccc;
+            padding: 5px;
+            min-height: 22px;
+            float: none;
+        }
+
+        #printArea table.ware-list tbody tr td.ware-name {
+            text-align: left;
+        }
+
+        .ware-list .col1 {
+            width: 10%;
+        }
+
+        .ware-list .col2 {
+            width: 15%;
+        }
+
+        .ware-list .col3 {
+            width: 46%;
+        }
+
+        .ware-list .col4 {
+            width: 8%;
+        }
+
+        .ware-list .col5 {
+            width: 8%;
+        }
+
+        .ware-list .col6 {
+            width: 12%;
+        }
+
+        .btn-container.fixed {
+            background-color: #F6F6F6;
+            height: 40px;
+            overflow: hidden;
+            position: fixed;
+            text-align: center;
+            width: 100%;
+            z-index: 10;
+        }
+
+        .btn-container.fixed.bottom {
+            bottom: 0;
+            padding-top: 10px;
+        }
+
+        .btn-container.fixed.top {
+            margin: 0;
+            padding-top: 10px;
+            top: 0;
+        }
+
+    </style>
+    <link rel="stylesheet" type="text/css" charset="utf-8" href="#springUrl('')/static/css/validator/jquery.validator.css">
+</head>
+
+<body>
+<div novalidate="true" class="n-validator n-yellow" id="form_osConfigPage_pageForm_step1" style="padding: 1% 2%">
+
+    <br>
+    <div  id="printArea" class="row">
+        <!--基本信息 start-->
+        <div class="widget-box">
+    <form action="" method="POST" id="searchForm">
+        <input id="receiptId" type="hidden"  value="$!{receipt.receiptId}"/>
+        <input id="receiptNo" type="hidden"  value="$!{receipt.receiptNo}"/>
+            <br>
+            <!--订单中心OCS商品信息-->
+            <div class="widget-header" align="center">
+                <h5>昌隆门业有限公司
+                    #if($!{receipt.doorCategory} == 0)生态门
+                    #elseif($!{receipt.doorCategory} == 1)钢木门
+                    #end
+                    订单客户回执单</h5>
+                <h5>
+                    <span style="float:left" >开票及接单人员：<input type="text"  style="float:left;width:20px;height:10px"  name="createPin" >  </span>
+                    <span style="float:left" >检查：<input type="text"  style="float:left;width:20px;height:10px"  name="checker" >  </span>
+                    <span style="float:right" >  接单时间：<input type="text"  style="float:right;width:20px;height:10px"  name="createTime" > </span></h5>
+                <div class="btn-container fixed top">
+                    <input style="float:right" class="button bg-blue ml10 mr10" id="btn-add-order" type="button" value="新增货单">
+                </div>
+            </div>
+            <div class="widget-body">
+                <div class="widget-main no-padding">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <th>货单号</th>
+                        <th>客户名称</th>
+                        <th>型号</th>
+                        <th>颜色</th>
+                        <th>洞口尺寸</th>
+                        <th>板</th>
+                        <th>门扇尺寸</th>
+                        <th>口线</th>
+                        <th>漆</th>
+                        <th>数量</th>
+                        <th>银角</th>
+                        <th>套版</th>
+                        <th>备注</th>
+                        <th>单价</th>
+                        <th>金额</th>
+                        <th>操作</th>
+                        </thead>
+                        <tbody>
+                            #foreach($!order in $!orderList)
+                            <tr>
+                                <td class="textL">
+                                    $!{order.orderId}
+                                </td>
+                                <td class="textL">
+                                    $!receipt.customerName
+                                </td>
+                                <td class="textL">
+                                    $!order.doorType
+                                </td>
+                                <td class="textL">
+                                    $!order.color
+                                </td>
+                                <td class="textL">
+                                    $!order.holeHeight*$!order.holeWide*$!order.holeThick
+                                </td>
+                                <td class="textL">
+                                    $!order.plate
+                                </td>
+                                <td class="textL">
+                                    $!order.doorHeight*$!order.doorWide
+                                </td>
+                                <td class="textL">
+                                    $!order.architrave
+                                </td>
+                                <td class="textL">
+                                    $!order.paint
+                                </td>
+                                <td class="textL">
+                                    $!order.number
+                                </td>
+                                <td class="textL">
+                                    $!order.silverCorner
+                                </td>
+                                <td class="textL">
+                                    $!order.sleevePlate
+                                </td>
+                                <td class="textL">
+                                    $!order.remark
+                                </td>
+                                <td class="textL">
+                                    $!order.price
+                                </td>
+                                <td class="textL">
+                                    $!order.totalMoney
+                                </td>
+                                <td>
+                                    <input class="button bg-green" type="button" value="修改">
+                                    <input class="button bg-green" type="button" value="保存">
+                                </td>
+                            </tr>
+                            #end
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <div class="widget-body">
+                <div class="widget-main no-padding">
+                    <table class="table table-striped table-bordered table-hover">
+                        <tbody>
+                        <tr style="line-height:2;">
+                            <td class="textR vam w120">
+                                送货司机：
+                            </td>
+                            <td class="textL" >
+                                <input name="driverName" type="text" placeholder="$!{receipt.driverName}">
+                            </td>
+                            <td class="textR vam w120">区域</td>
+                            <td class="textL">
+                                <input name="driverName" type="text" placeholder="$!{receipt.area}">
+                            </td>
+                            <td class="textR vam w120">序号</td>
+                            <td class="textL">
+                                <input name="driverName" type="text" placeholder="$!receipt.receiptNo">
+                            </td>
+                            <td class="textR vam w120">门</td>
+                            <td class="textL">
+                                <input name="driverName" type="text" placeholder="$!receipt.doorNum">
+                            </td>
+                            <td class="textR vam w120">板</td>
+                            <td class="textL">
+                                <input name="driverName" type="text" placeholder="$!receipt.plateNum">
+                            </td>
+                            <td class="textR vam w120">线</td>
+                            <td class="textL">
+                                <input name="driverName" type="text" placeholder="$!receipt.architraveNum">
+                            </td>
+                            <td class="textR vam w120">
+                                #if($!receipt.isCheck == 0)
+                                    <input class="button bg-green mr10 query" type="button" value="未核实">
+                                #else
+                                    <input class="button bg-green" type="button" value="已核实">
+                                #end
+                            </td>
+                            <td class="textR vam w120">订金</td>
+                            <td class="textL">
+                                <input name="driverName" type="text" placeholder="$!receipt.deposit">
+                            </td>
+                            <td class="textR vam w120">总金额</td>
+                            <td class="textL">
+                                <input name="driverName" type="text" placeholder="$!receipt.totalMoney">
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </form>
+            <div class="widget-body">
+                <div class="widget-main no-padding">
+                    <table class="table table-striped table-bordered table-hover">
+                        <tbody>
+                        <tr style="line-height:2;">
+                            <td class="textR vam w120">
+                                传真：0315-7103339  微信号：shuang235 订单热线：0315-2686668
+                            </td>
+
+                        </tr>
+                        <tr style="line-height:2;">
+                            <td class="textR vam w120">
+                                售后及查询电话：15733399926 微信同步  400热线：400-1126659 网址：www.hb-changlong.com
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="widget-body">
+                <div class="widget-main no-padding">
+                    <table class="table table-striped table-bordered table-hover">
+                        <tbody>
+                        <tr style="line-height:2;">
+                            <td class="textR vam w120">
+                                请仔细核对回执单内的所有内容，确认无误后通知接单员安排生产，如有改动及时通知接单员进行修改。
+                                客户确认后再出现任何任何错误本公司概不负责，收到货后请仔细核查数量，付款后请及时通知我们
+                                给您安排出货（转账时希望能加上您宝贵的大名以方便我们及时安排给您出货）
+                            </td>
+                            <td class="textR vam w120">
+                                二维码
+                            </td>
+
+                        </tr>
+                        <tr style="line-height:2;">
+                            <td class="textR vam w120">
+                                售后及查询电话：15733399926 微信同步  400热线：400-1126659 网址：www.hb-changlong.com
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="btn-container fixed top">
+        <button type="button" class="btn" id="btn-print-top">
+            <i class="icon-print"></i>打印
+        </button>
+        <button type="button" class="btn" id="btn-save">
+            <i class="icon-print"></i>保存
+        </button>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btn-print-top").bind("click", function () {
+            $(".btn-container").hide();
+            window.print(); // 开始打印
+            $(".btn-container").show();
+
+        });
+        $("#btn-print-back").click(function (e) {
+            Commons.closeModalDialog();
+        });
+        $("#btn-save").bind("click", function () {
+            $.ajax({
+                url: "/receipt/add",
+                type: "post",
+                data: {
+
+                },
+                dataType: "json",
+                success: function (data) {
+
+                }
+            });
+
+        });
+
+        $("#btn-add-order").bind("click", function () {
+##          var params = $("#orderSearchForm").serialize();
+##            util.ajaxPost("/auditExport/checkExport.json",params,function(result){
+##                if(result.state){
+##                    dialog.openUrlContent({
+##                        id : "export",
+##                        title:"导出已审核订单信息",
+##                        //buttons: [],
+##                        //type:"20",
+##                        url:"/auditExport/exportInfo?" + params,
+##                        width:550,
+##                        height:450,
+##                        callback:function($id){
+##                            dialog.confirm(function(){
+##                                dialog.unLoading($id)
+##                            });
+##                        }
+##                    });
+##                }else{
+##                    dialog.alert(result.message);
+##                }
+##            });
+
+            var receiptId =
+            var dialogWidth = $(window).width() > 600 ? 600 : Commons.getModalDialogWidth();
+            var dialogHeight = $(window).height() > 300 ? 300 : Commons.getModalDialogHeight();
+            Commons.showModalDialog({url: "#springUrl('')/order/addOrder?receiptId=" + receiptId+"&receiptNo="+receiptNo, title: "新增货单", width: dialogWidth});
+
+        });
+    });
+</script>
+</html>
