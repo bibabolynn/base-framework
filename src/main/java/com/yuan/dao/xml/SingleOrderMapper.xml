@@ -1,0 +1,1024 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuan.dao.SingleOrderMapper">
+  <resultMap id="BaseResultMap" type="com.yuan.model.SingleOrder">
+    <id column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="order_receipt_id" jdbcType="BIGINT" property="orderReceiptId" />
+    <result column="order_no" jdbcType="BIGINT" property="orderNo" />
+    <result column="door_category" jdbcType="TINYINT" property="doorCategory" />
+    <result column="price" jdbcType="BIGINT" property="price" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="total_money" jdbcType="BIGINT" property="totalMoney" />
+    <result column="door_type" jdbcType="VARCHAR" property="doorType" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
+    <result column="hole_height" jdbcType="INTEGER" property="holeHeight" />
+    <result column="hole_wide" jdbcType="INTEGER" property="holeWide" />
+    <result column="hole_thick" jdbcType="INTEGER" property="holeThick" />
+    <result column="door_height" jdbcType="INTEGER" property="doorHeight" />
+    <result column="door_wide" jdbcType="INTEGER" property="doorWide" />
+    <result column="plate" jdbcType="VARCHAR" property="plate" />
+    <result column="architrave" jdbcType="VARCHAR" property="architrave" />
+    <result column="paint" jdbcType="VARCHAR" property="paint" />
+    <result column="silver_corner" jdbcType="VARCHAR" property="silverCorner" />
+    <result column="sleeve_plate" jdbcType="VARCHAR" property="sleevePlate" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_pin" jdbcType="VARCHAR" property="createPin" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_pin" jdbcType="VARCHAR" property="updatePin" />
+    <result column="yn" jdbcType="TINYINT" property="yn" />
+    <result column="ts" jdbcType="TIMESTAMP" property="ts" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    order_id, order_receipt_id, order_no, door_category, price, number, total_money, 
+    door_type, color, hole_height, hole_wide, hole_thick, door_height, door_wide, plate, 
+    architrave, paint, silver_corner, sleeve_plate, remark, create_time, create_pin, 
+    update_time, update_pin, yn, ts
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from single_order
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from single_order
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.yuan.model.SingleOrder">
+    insert into single_order (order_id, order_receipt_id, order_no, 
+      door_category, price, number, 
+      total_money, door_type, color, 
+      hole_height, hole_wide, hole_thick, 
+      door_height, door_wide, plate, 
+      architrave, paint, silver_corner, 
+      sleeve_plate, remark, create_time, 
+      create_pin, update_time, update_pin, 
+      yn, ts)
+    values (#{orderId,jdbcType=BIGINT}, #{orderReceiptId,jdbcType=BIGINT}, #{orderNo,jdbcType=BIGINT}, 
+      #{doorCategory,jdbcType=TINYINT}, #{price,jdbcType=BIGINT}, #{number,jdbcType=INTEGER}, 
+      #{totalMoney,jdbcType=BIGINT}, #{doorType,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, 
+      #{holeHeight,jdbcType=INTEGER}, #{holeWide,jdbcType=INTEGER}, #{holeThick,jdbcType=INTEGER}, 
+      #{doorHeight,jdbcType=INTEGER}, #{doorWide,jdbcType=INTEGER}, #{plate,jdbcType=VARCHAR}, 
+      #{architrave,jdbcType=VARCHAR}, #{paint,jdbcType=VARCHAR}, #{silverCorner,jdbcType=VARCHAR}, 
+      #{sleevePlate,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createPin,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updatePin,jdbcType=VARCHAR}, 
+      #{yn,jdbcType=TINYINT}, #{ts,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yuan.model.SingleOrder">
+    insert into single_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="orderReceiptId != null">
+        order_receipt_id,
+      </if>
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="doorCategory != null">
+        door_category,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="totalMoney != null">
+        total_money,
+      </if>
+      <if test="doorType != null">
+        door_type,
+      </if>
+      <if test="color != null">
+        color,
+      </if>
+      <if test="holeHeight != null">
+        hole_height,
+      </if>
+      <if test="holeWide != null">
+        hole_wide,
+      </if>
+      <if test="holeThick != null">
+        hole_thick,
+      </if>
+      <if test="doorHeight != null">
+        door_height,
+      </if>
+      <if test="doorWide != null">
+        door_wide,
+      </if>
+      <if test="plate != null">
+        plate,
+      </if>
+      <if test="architrave != null">
+        architrave,
+      </if>
+      <if test="paint != null">
+        paint,
+      </if>
+      <if test="silverCorner != null">
+        silver_corner,
+      </if>
+      <if test="sleevePlate != null">
+        sleeve_plate,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createPin != null">
+        create_pin,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updatePin != null">
+        update_pin,
+      </if>
+      <if test="yn != null">
+        yn,
+      </if>
+      <if test="ts != null">
+        ts,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="orderReceiptId != null">
+        #{orderReceiptId,jdbcType=BIGINT},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=BIGINT},
+      </if>
+      <if test="doorCategory != null">
+        #{doorCategory,jdbcType=TINYINT},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=BIGINT},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="totalMoney != null">
+        #{totalMoney,jdbcType=BIGINT},
+      </if>
+      <if test="doorType != null">
+        #{doorType,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="holeHeight != null">
+        #{holeHeight,jdbcType=INTEGER},
+      </if>
+      <if test="holeWide != null">
+        #{holeWide,jdbcType=INTEGER},
+      </if>
+      <if test="holeThick != null">
+        #{holeThick,jdbcType=INTEGER},
+      </if>
+      <if test="doorHeight != null">
+        #{doorHeight,jdbcType=INTEGER},
+      </if>
+      <if test="doorWide != null">
+        #{doorWide,jdbcType=INTEGER},
+      </if>
+      <if test="plate != null">
+        #{plate,jdbcType=VARCHAR},
+      </if>
+      <if test="architrave != null">
+        #{architrave,jdbcType=VARCHAR},
+      </if>
+      <if test="paint != null">
+        #{paint,jdbcType=VARCHAR},
+      </if>
+      <if test="silverCorner != null">
+        #{silverCorner,jdbcType=VARCHAR},
+      </if>
+      <if test="sleevePlate != null">
+        #{sleevePlate,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createPin != null">
+        #{createPin,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatePin != null">
+        #{updatePin,jdbcType=VARCHAR},
+      </if>
+      <if test="yn != null">
+        #{yn,jdbcType=TINYINT},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yuan.model.SingleOrder">
+    update single_order
+    <set>
+      <if test="orderReceiptId != null">
+        order_receipt_id = #{orderReceiptId,jdbcType=BIGINT},
+      </if>
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=BIGINT},
+      </if>
+      <if test="doorCategory != null">
+        door_category = #{doorCategory,jdbcType=TINYINT},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=BIGINT},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="totalMoney != null">
+        total_money = #{totalMoney,jdbcType=BIGINT},
+      </if>
+      <if test="doorType != null">
+        door_type = #{doorType,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="holeHeight != null">
+        hole_height = #{holeHeight,jdbcType=INTEGER},
+      </if>
+      <if test="holeWide != null">
+        hole_wide = #{holeWide,jdbcType=INTEGER},
+      </if>
+      <if test="holeThick != null">
+        hole_thick = #{holeThick,jdbcType=INTEGER},
+      </if>
+      <if test="doorHeight != null">
+        door_height = #{doorHeight,jdbcType=INTEGER},
+      </if>
+      <if test="doorWide != null">
+        door_wide = #{doorWide,jdbcType=INTEGER},
+      </if>
+      <if test="plate != null">
+        plate = #{plate,jdbcType=VARCHAR},
+      </if>
+      <if test="architrave != null">
+        architrave = #{architrave,jdbcType=VARCHAR},
+      </if>
+      <if test="paint != null">
+        paint = #{paint,jdbcType=VARCHAR},
+      </if>
+      <if test="silverCorner != null">
+        silver_corner = #{silverCorner,jdbcType=VARCHAR},
+      </if>
+      <if test="sleevePlate != null">
+        sleeve_plate = #{sleevePlate,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createPin != null">
+        create_pin = #{createPin,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatePin != null">
+        update_pin = #{updatePin,jdbcType=VARCHAR},
+      </if>
+      <if test="yn != null">
+        yn = #{yn,jdbcType=TINYINT},
+      </if>
+      <if test="ts != null">
+        ts = #{ts,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yuan.model.SingleOrder">
+    update single_order
+    set order_receipt_id = #{orderReceiptId,jdbcType=BIGINT},
+      order_no = #{orderNo,jdbcType=BIGINT},
+      door_category = #{doorCategory,jdbcType=TINYINT},
+      price = #{price,jdbcType=BIGINT},
+      number = #{number,jdbcType=INTEGER},
+      total_money = #{totalMoney,jdbcType=BIGINT},
+      door_type = #{doorType,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR},
+      hole_height = #{holeHeight,jdbcType=INTEGER},
+      hole_wide = #{holeWide,jdbcType=INTEGER},
+      hole_thick = #{holeThick,jdbcType=INTEGER},
+      door_height = #{doorHeight,jdbcType=INTEGER},
+      door_wide = #{doorWide,jdbcType=INTEGER},
+      plate = #{plate,jdbcType=VARCHAR},
+      architrave = #{architrave,jdbcType=VARCHAR},
+      paint = #{paint,jdbcType=VARCHAR},
+      silver_corner = #{silverCorner,jdbcType=VARCHAR},
+      sleeve_plate = #{sleevePlate,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_pin = #{createPin,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_pin = #{updatePin,jdbcType=VARCHAR},
+      yn = #{yn,jdbcType=TINYINT},
+      ts = #{ts,jdbcType=TIMESTAMP}
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.yuan.model.SingleOrder">
+    <id column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="order_receipt_id" jdbcType="BIGINT" property="orderReceiptId" />
+    <result column="order_no" jdbcType="BIGINT" property="orderNo" />
+    <result column="door_category" jdbcType="TINYINT" property="doorCategory" />
+    <result column="price" jdbcType="BIGINT" property="price" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="total_money" jdbcType="BIGINT" property="totalMoney" />
+    <result column="door_type" jdbcType="VARCHAR" property="doorType" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
+    <result column="hole_height" jdbcType="INTEGER" property="holeHeight" />
+    <result column="hole_wide" jdbcType="INTEGER" property="holeWide" />
+    <result column="hole_thick" jdbcType="INTEGER" property="holeThick" />
+    <result column="door_height" jdbcType="INTEGER" property="doorHeight" />
+    <result column="door_wide" jdbcType="INTEGER" property="doorWide" />
+    <result column="plate" jdbcType="VARCHAR" property="plate" />
+    <result column="architrave" jdbcType="VARCHAR" property="architrave" />
+    <result column="paint" jdbcType="VARCHAR" property="paint" />
+    <result column="silver_corner" jdbcType="VARCHAR" property="silverCorner" />
+    <result column="sleeve_plate" jdbcType="VARCHAR" property="sleevePlate" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_pin" jdbcType="VARCHAR" property="createPin" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_pin" jdbcType="VARCHAR" property="updatePin" />
+    <result column="yn" jdbcType="TINYINT" property="yn" />
+    <result column="ts" jdbcType="TIMESTAMP" property="ts" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    order_id, order_receipt_id, order_no, door_category, price, number, total_money, 
+    door_type, color, hole_height, hole_wide, hole_thick, door_height, door_wide, plate, 
+    architrave, paint, silver_corner, sleeve_plate, remark, create_time, create_pin, 
+    update_time, update_pin, yn, ts
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from single_order
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from single_order
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.yuan.model.SingleOrder">
+    insert into single_order (order_id, order_receipt_id, order_no, 
+      door_category, price, number, 
+      total_money, door_type, color, 
+      hole_height, hole_wide, hole_thick, 
+      door_height, door_wide, plate, 
+      architrave, paint, silver_corner, 
+      sleeve_plate, remark, create_time, 
+      create_pin, update_time, update_pin, 
+      yn, ts)
+    values (#{orderId,jdbcType=BIGINT}, #{orderReceiptId,jdbcType=BIGINT}, #{orderNo,jdbcType=BIGINT}, 
+      #{doorCategory,jdbcType=TINYINT}, #{price,jdbcType=BIGINT}, #{number,jdbcType=INTEGER}, 
+      #{totalMoney,jdbcType=BIGINT}, #{doorType,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR}, 
+      #{holeHeight,jdbcType=INTEGER}, #{holeWide,jdbcType=INTEGER}, #{holeThick,jdbcType=INTEGER}, 
+      #{doorHeight,jdbcType=INTEGER}, #{doorWide,jdbcType=INTEGER}, #{plate,jdbcType=VARCHAR}, 
+      #{architrave,jdbcType=VARCHAR}, #{paint,jdbcType=VARCHAR}, #{silverCorner,jdbcType=VARCHAR}, 
+      #{sleevePlate,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createPin,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updatePin,jdbcType=VARCHAR}, 
+      #{yn,jdbcType=TINYINT}, #{ts,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yuan.model.SingleOrder">
+    insert into single_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="orderReceiptId != null">
+        order_receipt_id,
+      </if>
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="doorCategory != null">
+        door_category,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="totalMoney != null">
+        total_money,
+      </if>
+      <if test="doorType != null">
+        door_type,
+      </if>
+      <if test="color != null">
+        color,
+      </if>
+      <if test="holeHeight != null">
+        hole_height,
+      </if>
+      <if test="holeWide != null">
+        hole_wide,
+      </if>
+      <if test="holeThick != null">
+        hole_thick,
+      </if>
+      <if test="doorHeight != null">
+        door_height,
+      </if>
+      <if test="doorWide != null">
+        door_wide,
+      </if>
+      <if test="plate != null">
+        plate,
+      </if>
+      <if test="architrave != null">
+        architrave,
+      </if>
+      <if test="paint != null">
+        paint,
+      </if>
+      <if test="silverCorner != null">
+        silver_corner,
+      </if>
+      <if test="sleevePlate != null">
+        sleeve_plate,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createPin != null">
+        create_pin,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updatePin != null">
+        update_pin,
+      </if>
+      <if test="yn != null">
+        yn,
+      </if>
+      <if test="ts != null">
+        ts,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="orderReceiptId != null">
+        #{orderReceiptId,jdbcType=BIGINT},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=BIGINT},
+      </if>
+      <if test="doorCategory != null">
+        #{doorCategory,jdbcType=TINYINT},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=BIGINT},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="totalMoney != null">
+        #{totalMoney,jdbcType=BIGINT},
+      </if>
+      <if test="doorType != null">
+        #{doorType,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="holeHeight != null">
+        #{holeHeight,jdbcType=INTEGER},
+      </if>
+      <if test="holeWide != null">
+        #{holeWide,jdbcType=INTEGER},
+      </if>
+      <if test="holeThick != null">
+        #{holeThick,jdbcType=INTEGER},
+      </if>
+      <if test="doorHeight != null">
+        #{doorHeight,jdbcType=INTEGER},
+      </if>
+      <if test="doorWide != null">
+        #{doorWide,jdbcType=INTEGER},
+      </if>
+      <if test="plate != null">
+        #{plate,jdbcType=VARCHAR},
+      </if>
+      <if test="architrave != null">
+        #{architrave,jdbcType=VARCHAR},
+      </if>
+      <if test="paint != null">
+        #{paint,jdbcType=VARCHAR},
+      </if>
+      <if test="silverCorner != null">
+        #{silverCorner,jdbcType=VARCHAR},
+      </if>
+      <if test="sleevePlate != null">
+        #{sleevePlate,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createPin != null">
+        #{createPin,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatePin != null">
+        #{updatePin,jdbcType=VARCHAR},
+      </if>
+      <if test="yn != null">
+        #{yn,jdbcType=TINYINT},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yuan.model.SingleOrder">
+    update single_order
+    <set>
+      <if test="orderReceiptId != null">
+        order_receipt_id = #{orderReceiptId,jdbcType=BIGINT},
+      </if>
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=BIGINT},
+      </if>
+      <if test="doorCategory != null">
+        door_category = #{doorCategory,jdbcType=TINYINT},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=BIGINT},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="totalMoney != null">
+        total_money = #{totalMoney,jdbcType=BIGINT},
+      </if>
+      <if test="doorType != null">
+        door_type = #{doorType,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="holeHeight != null">
+        hole_height = #{holeHeight,jdbcType=INTEGER},
+      </if>
+      <if test="holeWide != null">
+        hole_wide = #{holeWide,jdbcType=INTEGER},
+      </if>
+      <if test="holeThick != null">
+        hole_thick = #{holeThick,jdbcType=INTEGER},
+      </if>
+      <if test="doorHeight != null">
+        door_height = #{doorHeight,jdbcType=INTEGER},
+      </if>
+      <if test="doorWide != null">
+        door_wide = #{doorWide,jdbcType=INTEGER},
+      </if>
+      <if test="plate != null">
+        plate = #{plate,jdbcType=VARCHAR},
+      </if>
+      <if test="architrave != null">
+        architrave = #{architrave,jdbcType=VARCHAR},
+      </if>
+      <if test="paint != null">
+        paint = #{paint,jdbcType=VARCHAR},
+      </if>
+      <if test="silverCorner != null">
+        silver_corner = #{silverCorner,jdbcType=VARCHAR},
+      </if>
+      <if test="sleevePlate != null">
+        sleeve_plate = #{sleevePlate,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createPin != null">
+        create_pin = #{createPin,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatePin != null">
+        update_pin = #{updatePin,jdbcType=VARCHAR},
+      </if>
+      <if test="yn != null">
+        yn = #{yn,jdbcType=TINYINT},
+      </if>
+      <if test="ts != null">
+        ts = #{ts,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yuan.model.SingleOrder">
+    update single_order
+    set order_receipt_id = #{orderReceiptId,jdbcType=BIGINT},
+      order_no = #{orderNo,jdbcType=BIGINT},
+      door_category = #{doorCategory,jdbcType=TINYINT},
+      price = #{price,jdbcType=BIGINT},
+      number = #{number,jdbcType=INTEGER},
+      total_money = #{totalMoney,jdbcType=BIGINT},
+      door_type = #{doorType,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR},
+      hole_height = #{holeHeight,jdbcType=INTEGER},
+      hole_wide = #{holeWide,jdbcType=INTEGER},
+      hole_thick = #{holeThick,jdbcType=INTEGER},
+      door_height = #{doorHeight,jdbcType=INTEGER},
+      door_wide = #{doorWide,jdbcType=INTEGER},
+      plate = #{plate,jdbcType=VARCHAR},
+      architrave = #{architrave,jdbcType=VARCHAR},
+      paint = #{paint,jdbcType=VARCHAR},
+      silver_corner = #{silverCorner,jdbcType=VARCHAR},
+      sleeve_plate = #{sleevePlate,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_pin = #{createPin,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_pin = #{updatePin,jdbcType=VARCHAR},
+      yn = #{yn,jdbcType=TINYINT},
+      ts = #{ts,jdbcType=TIMESTAMP}
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </update>
+  <resultMap id="BaseResultMap" type="com.yuan.model.SingleOrder">
+    <id column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="order_receipt_id" jdbcType="BIGINT" property="orderReceiptId" />
+    <result column="order_no" jdbcType="BIGINT" property="orderNo" />
+    <result column="door_category" jdbcType="TINYINT" property="doorCategory" />
+    <result column="price" jdbcType="BIGINT" property="price" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="total_money" jdbcType="BIGINT" property="totalMoney" />
+    <result column="door_type" jdbcType="VARCHAR" property="doorType" />
+    <result column="color" jdbcType="VARCHAR" property="color" />
+    <result column="hole_height" jdbcType="INTEGER" property="holeHeight" />
+    <result column="hole_wide" jdbcType="INTEGER" property="holeWide" />
+    <result column="hole_thick" jdbcType="INTEGER" property="holeThick" />
+    <result column="door_height" jdbcType="INTEGER" property="doorHeight" />
+    <result column="door_wide" jdbcType="INTEGER" property="doorWide" />
+    <result column="plate" jdbcType="VARCHAR" property="plate" />
+    <result column="architrave" jdbcType="VARCHAR" property="architrave" />
+    <result column="paint" jdbcType="VARCHAR" property="paint" />
+    <result column="silver_corner" jdbcType="VARCHAR" property="silverCorner" />
+    <result column="sleeve_plate" jdbcType="VARCHAR" property="sleevePlate" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_pin" jdbcType="VARCHAR" property="createPin" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_pin" jdbcType="VARCHAR" property="updatePin" />
+    <result column="yn" jdbcType="TINYINT" property="yn" />
+    <result column="ts" jdbcType="TIMESTAMP" property="ts" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    order_id, order_receipt_id, order_no, door_category, price, number, total_money, 
+    order_type, color, hole_height, hole_wide, hole_thick, door_height, door_wide, plate, 
+    architrave, paint, silver_corner, sleeve_plate, remark, create_time, create_pin, 
+    update_time, update_pin, yn, ts
+  </sql>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from single_order
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.yuan.model.SingleOrder">
+    insert into single_order (order_id, order_receipt_id, order_no, 
+      door_category, price, number, 
+      total_money, order_type, color, 
+      hole_height, hole_wide, hole_thick, 
+      door_height, door_wide, plate, 
+      architrave, paint, silver_corner, 
+      sleeve_plate, remark, create_time, 
+      create_pin, update_time, update_pin, 
+      yn, ts)
+    values (#{orderId,jdbcType=BIGINT}, #{orderReceiptId,jdbcType=BIGINT}, #{orderNo,jdbcType=BIGINT}, 
+      #{doorCategory,jdbcType=TINYINT}, #{price,jdbcType=BIGINT}, #{number,jdbcType=INTEGER}, 
+      #{totalMoney,jdbcType=BIGINT}, #{doorType,jdbcType=VARCHAR}, #{color,jdbcType=VARCHAR},
+      #{holeHeight,jdbcType=INTEGER}, #{holeWide,jdbcType=INTEGER}, #{holeThick,jdbcType=INTEGER}, 
+      #{doorHeight,jdbcType=INTEGER}, #{doorWide,jdbcType=INTEGER}, #{plate,jdbcType=VARCHAR}, 
+      #{architrave,jdbcType=VARCHAR}, #{paint,jdbcType=VARCHAR}, #{silverCorner,jdbcType=VARCHAR}, 
+      #{sleevePlate,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createPin,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updatePin,jdbcType=VARCHAR}, 
+      #{yn,jdbcType=TINYINT}, #{ts,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yuan.model.SingleOrder">
+    insert into single_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="orderReceiptId != null">
+        order_receipt_id,
+      </if>
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="doorCategory != null">
+        door_category,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="totalMoney != null">
+        total_money,
+      </if>
+      <if test="doorType != null">
+        order_type,
+      </if>
+      <if test="color != null">
+        color,
+      </if>
+      <if test="holeHeight != null">
+        hole_height,
+      </if>
+      <if test="holeWide != null">
+        hole_wide,
+      </if>
+      <if test="holeThick != null">
+        hole_thick,
+      </if>
+      <if test="doorHeight != null">
+        door_height,
+      </if>
+      <if test="doorWide != null">
+        door_wide,
+      </if>
+      <if test="plate != null">
+        plate,
+      </if>
+      <if test="architrave != null">
+        architrave,
+      </if>
+      <if test="paint != null">
+        paint,
+      </if>
+      <if test="silverCorner != null">
+        silver_corner,
+      </if>
+      <if test="sleevePlate != null">
+        sleeve_plate,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createPin != null">
+        create_pin,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updatePin != null">
+        update_pin,
+      </if>
+      <if test="yn != null">
+        yn,
+      </if>
+      <if test="ts != null">
+        ts,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderId != null">
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="orderReceiptId != null">
+        #{orderReceiptId,jdbcType=BIGINT},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=BIGINT},
+      </if>
+      <if test="doorCategory != null">
+        #{doorCategory,jdbcType=TINYINT},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=BIGINT},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="totalMoney != null">
+        #{totalMoney,jdbcType=BIGINT},
+      </if>
+      <if test="doorType != null">
+        #{doorType,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="holeHeight != null">
+        #{holeHeight,jdbcType=INTEGER},
+      </if>
+      <if test="holeWide != null">
+        #{holeWide,jdbcType=INTEGER},
+      </if>
+      <if test="holeThick != null">
+        #{holeThick,jdbcType=INTEGER},
+      </if>
+      <if test="doorHeight != null">
+        #{doorHeight,jdbcType=INTEGER},
+      </if>
+      <if test="doorWide != null">
+        #{doorWide,jdbcType=INTEGER},
+      </if>
+      <if test="plate != null">
+        #{plate,jdbcType=VARCHAR},
+      </if>
+      <if test="architrave != null">
+        #{architrave,jdbcType=VARCHAR},
+      </if>
+      <if test="paint != null">
+        #{paint,jdbcType=VARCHAR},
+      </if>
+      <if test="silverCorner != null">
+        #{silverCorner,jdbcType=VARCHAR},
+      </if>
+      <if test="sleevePlate != null">
+        #{sleevePlate,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createPin != null">
+        #{createPin,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatePin != null">
+        #{updatePin,jdbcType=VARCHAR},
+      </if>
+      <if test="yn != null">
+        #{yn,jdbcType=TINYINT},
+      </if>
+      <if test="ts != null">
+        #{ts,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yuan.model.SingleOrder">
+    update single_order
+    <set>
+      <if test="orderReceiptId != null">
+        order_receipt_id = #{orderReceiptId,jdbcType=BIGINT},
+      </if>
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=BIGINT},
+      </if>
+      <if test="doorCategory != null">
+        door_category = #{doorCategory,jdbcType=TINYINT},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=BIGINT},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="totalMoney != null">
+        total_money = #{totalMoney,jdbcType=BIGINT},
+      </if>
+      <if test="doorType != null">
+        door_type = #{doorType,jdbcType=VARCHAR},
+      </if>
+      <if test="color != null">
+        color = #{color,jdbcType=VARCHAR},
+      </if>
+      <if test="holeHeight != null">
+        hole_height = #{holeHeight,jdbcType=INTEGER},
+      </if>
+      <if test="holeWide != null">
+        hole_wide = #{holeWide,jdbcType=INTEGER},
+      </if>
+      <if test="holeThick != null">
+        hole_thick = #{holeThick,jdbcType=INTEGER},
+      </if>
+      <if test="doorHeight != null">
+        door_height = #{doorHeight,jdbcType=INTEGER},
+      </if>
+      <if test="doorWide != null">
+        door_wide = #{doorWide,jdbcType=INTEGER},
+      </if>
+      <if test="plate != null">
+        plate = #{plate,jdbcType=VARCHAR},
+      </if>
+      <if test="architrave != null">
+        architrave = #{architrave,jdbcType=VARCHAR},
+      </if>
+      <if test="paint != null">
+        paint = #{paint,jdbcType=VARCHAR},
+      </if>
+      <if test="silverCorner != null">
+        silver_corner = #{silverCorner,jdbcType=VARCHAR},
+      </if>
+      <if test="sleevePlate != null">
+        sleeve_plate = #{sleevePlate,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createPin != null">
+        create_pin = #{createPin,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatePin != null">
+        update_pin = #{updatePin,jdbcType=VARCHAR},
+      </if>
+      <if test="yn != null">
+        yn = #{yn,jdbcType=TINYINT},
+      </if>
+      <if test="ts != null">
+        ts = #{ts,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yuan.model.SingleOrder">
+    update single_order
+    set order_receipt_id = #{orderReceiptId,jdbcType=BIGINT},
+      order_no = #{orderNo,jdbcType=BIGINT},
+      door_category = #{doorCategory,jdbcType=TINYINT},
+      price = #{price,jdbcType=BIGINT},
+      number = #{number,jdbcType=INTEGER},
+      total_money = #{totalMoney,jdbcType=BIGINT},
+      door_type = #{doorType,jdbcType=VARCHAR},
+      color = #{color,jdbcType=VARCHAR},
+      hole_height = #{holeHeight,jdbcType=INTEGER},
+      hole_wide = #{holeWide,jdbcType=INTEGER},
+      hole_thick = #{holeThick,jdbcType=INTEGER},
+      door_height = #{doorHeight,jdbcType=INTEGER},
+      door_wide = #{doorWide,jdbcType=INTEGER},
+      plate = #{plate,jdbcType=VARCHAR},
+      architrave = #{architrave,jdbcType=VARCHAR},
+      paint = #{paint,jdbcType=VARCHAR},
+      silver_corner = #{silverCorner,jdbcType=VARCHAR},
+      sleeve_plate = #{sleevePlate,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_pin = #{createPin,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_pin = #{updatePin,jdbcType=VARCHAR},
+      yn = #{yn,jdbcType=TINYINT},
+      ts = #{ts,jdbcType=TIMESTAMP}
+    where order_id = #{orderId,jdbcType=BIGINT}
+  </update>
+
+
+  <select id="selectOrderListsByIds" parameterType="java.util.List" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from single_order
+    WHERE order_id IN
+    <foreach close=")" collection="orderIds" index="index" item="item" open="(" separator=",">
+      #{item,jdbcType=VARCHAR}
+    </foreach>
+    ORDER BY order_id
+  </select>
+
+
+</mapper>
